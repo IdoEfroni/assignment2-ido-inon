@@ -6,19 +6,244 @@ var pac_color;
 var start_time;
 var time_elapsed;
 var interval;
+//ido added
+var List = new Array();
+var personP = { userName: "p", password: "p", fullName: "p.p", email: "p@gmai.com", date: "11/9/93" };
+List.push(personP);
+///
+var myImage = new Image();
+myImage.src = 'pacManRight.png';
 
-$(document).ready(function() {
+////vars for the game
+var foodNum = 0;
+var fiveFoodColor;
+var fifteenFoodColor;
+var twentyFiveFoodColor;
+var timeLimit = 60;
+var monsterAmount = 1;
+sessionStorage.setItem("leftKey","37");
+sessionStorage.setItem("upKey","38");
+sessionStorage.setItem("rightKey","39");
+sessionStorage.setItem("downKey","40");
+var leftKey = 37;
+var upKey = 38;
+var rightKey = 39;
+var downKey = 40;
+
+
+
+
+$(document).ready(function () {
 	context = canvas.getContext("2d");
+	//Start the PakMan game
+	//Initialize();
+	/* 	var personP = { userName: "p", password: "p" ,fullName:"p.p",email:"p@gmai.com",date:"11/9/93" }
+		List.push(personP);
+		document.getElementById("Login").style.display = 'none';
+		document.getElementById("Register").style.display = 'none';
+		document.getElementById("Preferences").style.display = 'none';
+		document.getElementById("Welcome").style.display = 'none';
+	 */
+	//Register();
+
 	Start();
 });
 
+function Initialize() {
+	document.getElementById("Welcome").style.display = 'block';
+	document.getElementById("score").style.display = 'none';
+	document.getElementById("time").style.display = 'none';
+	document.getElementById("game").style.display = 'none';
+	document.getElementById("Login").style.display = 'none';
+	document.getElementById("Register").style.display = 'none';
+	document.getElementById("Preferences").style.display = 'none';
+	var personP = { userName: "p", password: "p", fullName: "p.p", email: "p@gmai.com", date: "11/9/93" }
+	List.push(personP);
+}
+
+function Welcome() {
+	var x = document.getElementById("Welcome");
+	if (x.style.display === "none") {
+		x.style.display = "block";
+		document.getElementById("score").style.display = 'none';
+		document.getElementById("time").style.display = 'none';
+		document.getElementById("game").style.display = 'none';
+		document.getElementById("Login").style.display = 'none';
+		document.getElementById("Register").style.display = 'none';
+		document.getElementById("Preferences").style.display = 'none';
+		//} else {
+		//	x.style.display = "none";
+	}
+}
+
+function Register() {
+
+	var x = document.getElementById("Register");
+	//if (x.style.display === "none") {
+	x.style.display = "block";
+	document.getElementById("Welcome").style.display = 'none';
+	document.getElementById("Login").style.display = 'none';
+	document.getElementById("score").style.display = 'none';
+	document.getElementById("time").style.display = 'none';
+	document.getElementById("game").style.display = 'none';
+
+}
+function tryRegister() {
+
+
+}
+
+function Login() {
+	var x = document.getElementById("Login");
+	//if (x.style.display === "none") {
+	x.style.display = "block";
+	if(	document.getElementById("Welcome").style.display != 'none'){
+	document.getElementById("Welcome").style.display = 'none';
+	}
+	if(	document.getElementById("Register").style.display != 'none'){
+	document.getElementById("Register").style.display = 'none';
+	}
+	/**
+	document.getElementById("score").style.display = 'none';
+	document.getElementById("time").style.display = 'none';
+	document.getElementById("game").style.display = 'none';
+	 */
+}
+
+function tryToLog() {
+	var userN = $('#Login').find('input[name="UserNameLog"]').val();
+	var UserP = $('#Login').find('input[name="PasswordLog"]').val();
+
+	//var userN = document.getElementById("UserNameLog").value;
+	//var UserP = document.getElementById("PasswordLog").value;
+	if (userN == "" || UserP == "" || userN == null || UserP == null) {
+		alert("please fill the missing fileds");
+		$('#Login').find('input[name="UserNameLog"]').val("");
+		$('#Login').find('input[name="PasswordLog"]').val("");
+	} else {
+		for (var i = 0; i < List.length; i++) {
+			if (List[i].userName == userN && List[i].password == UserP) {
+				showPreferences();
+			} else {
+				alert("please enter correct User-name/Password");
+				$('#Login').find('input[name="UserNameLog"]').val("");
+				$('#Login').find('input[name="PasswordLog"]').val("");
+			}
+		}
+	}
+}
+function showPreferences() {
+		//clear the screen 
+		var x = document.getElementById("Preferences");
+		if(x.style.display=='none'){
+			document.getElementById("Preferences").style.display = 'block';
+
+		}
+		var Welcome = document.getElementById("Welcome");
+		var Login = document.getElementById("Login");
+		var Register = document.getElementById("Register");
+
+		if(Welcome.style.display =='block'){
+			Welcome.style.display = 'none'
+		}if(Login.style.display =='block'){
+			Login.style.display = 'none'
+		}if(Register.style.display =='block'){
+			Register.style.display = 'none'
+		}
+		/*
+		document.getElementById("Preferences").style.display = 'block';
+		document.getElementById("Welcome").style.display = 'none';
+		document.getElementById("Login").style.display = 'none';
+		document.getElementById("Register").style.display = 'none';
+		*/
+}
+function preferences() {
+
+	foodNum = $('#Preferences').find('input[name="PelletsNum"]').val();
+	fiveFoodColor = $('#Preferences').find('input[name="fivePellet"]').val();
+	fifteenFoodColor = $('#Preferences').find('input[name="fifteenPellet"]').val();
+	twentyFiveFoodColor = $('#Preferences').find('input[name="twentyfivePellet"]').val();
+	timeLimit = $('#Preferences').find('input[name="timeLimit"]').val();
+	monsterAmount = $('#Preferences').find('input[name="monsterAmount"]').val();
+	if (foodNum == "" || fiveFoodColor == "" || fifteenFoodColor == "" || timeLimit == "" || monsterAmount == "") {
+		alert("please enter all of the missing details");
+	} else {
+		StartGame();
+	}
+	
+}
+
+function RandomValues() {
+	foodNum = getRandomInt(50, 90);
+	$('#Preferences').find('input[name="PelletsNum"]').val(foodNum);
+	fiveFoodColor = getRandomColor;
+	$('#Preferences').find('input[name="fivePellet"]').val(fiveFoodColor);
+	fifteenFoodColor = getRandomColor;
+	$('#Preferences').find('input[name="fifteenPellet"]').val(fifteenFoodColor);
+	twentyFiveFoodColor = getRandomColor;
+	$('#Preferences').find('input[name="twentyfivePellet"]').val(twentyFiveFoodColor);
+	timeLimit = getRandomInt(60, 1000);
+	$('#Preferences').find('input[name="timeLimit"]').val(timeLimit);
+	monsterAmount = getRandomInt(1, 4);
+	$('#Preferences').find('input[name="monsterAmount"]').val(monsterAmount);
+}
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+function getRandomColor() {
+	var letters = '0123456789ABCDEF';
+	var color = '#';
+	for (var i = 0; i < 6; i++) {
+		color += letters[Math.floor(Math.random() * 16)];
+	}
+	return color;
+}
+
+function setRandomColor() {
+	$("#colorpad").css("background-color", getRandomColor());
+}
+
+function functionUpKey(event) {
+	upKey = event.which || event.keyCode;
+	sessionStorage.setItem("upKey",upKey.toString());
+}
+function functionDownKey(event) {
+	downKey = event.which || event.keyCode;
+	sessionStorage.setItem("downKey",downKey.toString());
+
+}
+function functionLeftKey(event) {
+	leftKey = event.which || event.keyCode;
+	sessionStorage.setItem("leftKey",leftKey.toString());
+
+}
+function functionRightKey(event) {
+	rightKey = event.which || event.keyCode;
+	sessionStorage.setItem("rightKey",rightKey.toString());
+
+}
+
+function StartGame() {
+	document.getElementById("Welcome").style.display = 'none';
+	document.getElementById("Login").style.display = 'none';
+	document.getElementById("Register").style.display = 'none';
+	document.getElementById("Preferences").style.display = 'none';
+	document.getElementById("score").style.display = 'block';
+	document.getElementById("time").style.display = 'block';
+	document.getElementById("game").style.display = 'block';
+	Start();
+}
+
+/**
+ * this is the original function 
+ */
 function Start() {
 	board = new Array();
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 100;
 	var food_remain = 50;
-	var pacman_remain = 1;
+	var pacman_remain = 1;	
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
 		board[i] = new Array();
@@ -84,15 +309,19 @@ function findRandomEmptyCell(board) {
 
 function GetKeyPressed() {
 	if (keysDown[38]) {
+		myImage.src = 'pacManUp.png';
 		return 1;
 	}
 	if (keysDown[40]) {
+		myImage.src ='pacManDown.png';
 		return 2;
 	}
 	if (keysDown[37]) {
+		myImage.src ='pacManLeft.png';
 		return 3;
 	}
 	if (keysDown[39]) {
+		myImage.src ='pacManRight.png';
 		return 4;
 	}
 }
@@ -107,6 +336,8 @@ function Draw() {
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) {
+				context.drawImage(myImage,center.x-30,center.y-30,60,60);
+				/*
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
@@ -116,6 +347,7 @@ function Draw() {
 				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
+				*/
 			} else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
