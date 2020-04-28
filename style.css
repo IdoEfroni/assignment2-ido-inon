@@ -152,4 +152,31 @@ span {
 	font-family: cursive;
 	font-size: 20px;
 	color:#ffa91e;
+  }
+#score, #time, #lives
+{
+    display:inline;
+}
+
+.board {
+	widows: 600px;
+    height:600px;
+	position: relative 
+}
+
+#canvas {
+	position: absolute; left: 0; top: 0; z-index: 0; 
+}
+#canvas2 {
+	position: absolute; left: 0; top: 0; z-index:1; 
+}
+		
+footer {
+    bottom: 0;
+    color: #707070;
+    height: 2em;
+    left: 0;
+    position: relative;
+    font-size: small;
+    width:100%;
 }

@@ -7,8 +7,6 @@
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="./jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="./app.js"></script>
-
-
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -17,7 +15,7 @@
 </head>
 
 
-<body style="background-color:rgb(255, 255, 255);">
+<body style="background-color:rgb(0, 0, 0);">
 
 	<!-- ido code  -->
 
@@ -39,17 +37,25 @@
 	</nav>
 	
 
-	<div id="score" style="display: none;">
-		<label for="lblScore">SCORE:</label>
-		<input id="lblScore" type="text" />
+	<div id = "block_container">
+		<div id="score" style="display: none;">
+			<label for="lblScore">SCORE:</label>
+			<input id="lblScore" type="text" />
+		</div>
+		<div id="time" style="display: none;">
+			<label for="lblTime">REM TIME:</label>
+			<input id="lblTime" type="text" />
+		</div>
+		<div id="lives" style="display: none;">
+			<label for="lblLives">REM LIVES:</label>
+			<input id="lblLives" type="text" />
+		</div>
+		<div id="game" class= "board" style="display: none;">
+			<canvas id="canvas" class= "canvas-layer" height="600" width="600"></canvas>
+			<canvas id="canvas2" class= "canvas-layer"  height="600" width="600"></canvas>
+		</div>
 	</div>
-	<div id="time" style="display: none;">
-		<label for="lblTime">TIME:</label>
-		<input id="lblTime" type="text" />
-	</div>
-	<div id="game" style="display: none;">
-		<canvas id="canvas" height="600" width="600"></canvas>
-	</div>
+	
 
 	<!-- ido code  -->
 
@@ -177,10 +183,9 @@
 		<p>Posted by: Ovadia Ido Efroni & Inon Ben Zikri</p>
 		<p>Contact information: <a href="mailto:efronio@post.bgu.ac.il">
 				efronio@post.bgu.ac.il</a>.
-			<a href="mailto:inon@post.bgu.ac.il">
-				inon@post.bgu.ac.il</a>.</p>
+			<a href="mailto:inonbenz@post.bgu.ac.il">
+				inonbenz@post.bgu.ac.il</a>.</p>
 	</footer>
-
 
 
 
