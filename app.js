@@ -13,7 +13,7 @@ var interval2;
 var interval3;
 //ido added
 var List = new Array();
-var personP = { userName: "p", password: "p", fullName: "p.p", email: "p@gmai.com", date: "11/9/93" };
+var personP = { userName: "p", password: "p", firstName: "p", lastName: "p", email: "p@gmai.com", date: "11/9/93" };
 List.push(personP);
 ///
 var myImage = new Image();
@@ -45,9 +45,6 @@ var upKey = 38;
 var rightKey = 39;
 var downKey = 40;
 
-
-
-
 $(document).ready(function () {
 	var c1 = document.getElementById('canvas')
 	context = c1.getContext("2d");
@@ -69,6 +66,24 @@ $(document).ready(function () {
 	//Start();
 });
 
+$(document).on("click", "container",function(event) {
+	$(this).hide(); // hide when clicked
+	$('.modal-backdrop').hide();
+	$('container').hide();
+
+  });
+
+//close about on escape key
+$(document).keydown(function(e) {
+	var code = e.keyCode || e.which;
+	if (code == 27){
+		 $("#myModal").hide();
+		 $('.modal-backdrop').hide();
+	}
+  });
+
+ 
+  
 function Initialize() {
 	document.getElementById("Welcome").style.display = 'block';
 	document.getElementById("score").style.display = 'none';
@@ -110,21 +125,74 @@ function Register() {
 	document.getElementById("time").style.display = 'none';
 	document.getElementById("game").style.display = 'none';
 
+	$("#commentForm").submit(function (e) {
+		e.preventDefault();
+		validation();
+	})
+
 }
-function tryRegister() {
+function validation() {
+	var UserNameR = $('#Register').find('input[name="UserName"]').val();
+	var cemail = $('#Register').find('input[name="email"]').val();
+	var Password = $('#Register').find('input[name="Password"]').val();
+	var firstName = $('#Register').find('input[name="firstName"]').val();
+	var SecondName = $('#Register').find('input[name="SecondName"]').val();
+	var BirthDate = $('#Register').find('input[name="BirthDate"]').val();
+	var letters = /^[0-9a-zA-Z]+$/;
+	var tempPerson = { userName: UserNameR, password: Password, firstName: firstName, lastName: SecondName, email: cemail, date: BirthDate };
+	if (UserName == "" || cemail == "" || Password == "" || firstName == "" ||
+		SecondName == "" || BirthDate == "") {
+		return false;
+	} else if (!document.getElementById("Password").value.match(letters)) {
+		alert("please enter correct password that contain only number and letters");
+		return false;
+	} else if (isAlpha(firstName) == false) {
+		alert("please enter correct first name");
+		return false;
 
+	} else if (isAlpha(SecondName) == false) {
+		alert("please enter correct last name");
+		return false;
+	}
+	else if (isInSystem(UserNameR) == false) {
+		alert("user Name alrady exist");
+		return false;
+	}else{
+	List.push(tempPerson);
+	Login();
+	}
+}
 
+function isInSystem(str) {
+	for (var i = 0; i < List.length; i++) {
+		if (List[i].userName == str) {
+			return false;
+		}
+	}
+	return true;
+}
+
+function isAlpha(str) {
+	var code, i, len;
+	for (i = 0, len = str.length; i < len; i++) {
+		code = str.charCodeAt(i);
+		if (!(code > 64 && code < 91) && !(code > 96 && code < 123)) { // lower alpha (a-z)
+			return false;
+		}
+	}
+	return true;
 }
 
 function Login() {
-	var x = document.getElementById("Login");
-	//if (x.style.display === "none") {
-	x.style.display = "block";
-	if(	document.getElementById("Welcome").style.display != 'none'){
-	document.getElementById("Welcome").style.display = 'none';
+
+	if (document.getElementById("Login").style.display === "none") {
+		document.getElementById("Login").style.display = 'block';
 	}
-	if(	document.getElementById("Register").style.display != 'none'){
-	document.getElementById("Register").style.display = 'none';
+	if (document.getElementById("Welcome").style.display != 'none') {
+		document.getElementById("Welcome").style.display = 'none';
+	}
+	if (document.getElementById("Register").style.display != 'none') {
+		document.getElementById("Register").style.display = 'none';
 	}
 	/**
 	document.getElementById("score").style.display = 'none';
@@ -135,50 +203,52 @@ function Login() {
 
 function tryToLog() {
 	var userN = $('#Login').find('input[name="UserNameLog"]').val();
-	var UserP = $('#Login').find('input[name="PasswordLog"]').val();
+	var userP = $('#Login').find('input[name="PasswordLog"]').val();
 
 	//var userN = document.getElementById("UserNameLog").value;
 	//var UserP = document.getElementById("PasswordLog").value;
-	if (userN == "" || UserP == "" || userN == null || UserP == null) {
+	if (userN == "" || userP == "" || userN == null || userP == null) {
 		alert("please fill the missing fileds");
 		$('#Login').find('input[name="UserNameLog"]').val("");
 		$('#Login').find('input[name="PasswordLog"]').val("");
+		return false;
 	} else {
 		for (var i = 0; i < List.length; i++) {
-			if (List[i].userName == userN && List[i].password == UserP) {
+			if (List[i].userName == userN && List[i].password == userP) {
 				showPreferences();
-			} else {
-				alert("please enter correct User-name/Password");
-				$('#Login').find('input[name="UserNameLog"]').val("");
-				$('#Login').find('input[name="PasswordLog"]').val("");
+				return true;
 			}
 		}
+		alert("please enter correct User-name/Password");
+			$('#Login').find('input[name="UserNameLog"]').val("");
+			$('#Login').find('input[name="PasswordLog"]').val("");
+			return false;
 	}
 }
 function showPreferences() {
-		//clear the screen 
-		var x = document.getElementById("Preferences");
-		if(x.style.display=='none'){
-			document.getElementById("Preferences").style.display = 'block';
-
-		}
-		var Welcome = document.getElementById("Welcome");
-		var Login = document.getElementById("Login");
-		var Register = document.getElementById("Register");
-
-		if(Welcome.style.display =='block'){
-			Welcome.style.display = 'none'
-		}if(Login.style.display =='block'){
-			Login.style.display = 'none'
-		}if(Register.style.display =='block'){
-			Register.style.display = 'none'
-		}
-		/*
+	//clear the screen 
+	var x = document.getElementById("Preferences");
+	if (x.style.display == 'none') {
 		document.getElementById("Preferences").style.display = 'block';
-		document.getElementById("Welcome").style.display = 'none';
-		document.getElementById("Login").style.display = 'none';
-		document.getElementById("Register").style.display = 'none';
-		*/
+
+	}
+	var Welcome = document.getElementById("Welcome");
+	var Login = document.getElementById("Login");
+	var Register = document.getElementById("Register");
+
+	if (Welcome.style.display == 'block') {
+		Welcome.style.display = 'none'
+	} if (Login.style.display == 'block') {
+		Login.style.display = 'none'
+	} if (Register.style.display == 'block') {
+		Register.style.display = 'none'
+	}
+	/*
+	document.getElementById("Preferences").style.display = 'block';
+	document.getElementById("Welcome").style.display = 'none';
+	document.getElementById("Login").style.display = 'none';
+	document.getElementById("Register").style.display = 'none';
+	*/
 }
 function preferences() {
 
@@ -193,8 +263,9 @@ function preferences() {
 	} else {
 		StartGame();
 	}
-	
+
 }
+
 
 function RandomValues() {
 	foodNum = getRandomInt(50, 90);
@@ -228,21 +299,21 @@ function setRandomColor() {
 
 function functionUpKey(event) {
 	upKey = event.which || event.keyCode;
-	sessionStorage.setItem("upKey",upKey.toString());
+	sessionStorage.setItem("upKey", upKey.toString());
 }
 function functionDownKey(event) {
 	downKey = event.which || event.keyCode;
-	sessionStorage.setItem("downKey",downKey.toString());
+	sessionStorage.setItem("downKey", downKey.toString());
 
 }
 function functionLeftKey(event) {
 	leftKey = event.which || event.keyCode;
-	sessionStorage.setItem("leftKey",leftKey.toString());
+	sessionStorage.setItem("leftKey", leftKey.toString());
 
 }
 function functionRightKey(event) {
 	rightKey = event.which || event.keyCode;
-	sessionStorage.setItem("rightKey",rightKey.toString());
+	sessionStorage.setItem("rightKey", rightKey.toString());
 
 }
 
@@ -336,14 +407,14 @@ function Start() {
 	keysDown = {};
 	addEventListener(
 		"keydown",
-		function(e) {
+		function (e) {
 			keysDown[e.keyCode] = true;
 		},
 		false
 	);
 	addEventListener(
 		"keyup",
-		function(e) {
+		function (e) {
 			keysDown[e.keyCode] = false;
 		},
 		false

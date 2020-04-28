@@ -1,31 +1,92 @@
-/* Add a black background color to the top navigation */
-.Menu {
-	background-color: #333;
-	overflow: hidden;
-  }
-  
-  /* Style the links inside the navigation bar */
-  .Menu a {
-	float: left;
-	color: #f2f2f2;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 17px;
-  }
-  
-  /* Change the color of links on hover */
-  .Menu a:hover {
-	background-color: #ddd;
-	color: black;
-  }
-  
-  /* Add a color to the active/current link */
-  .Menu a.active {
-	background-color: #4CAF50;
-	color: white;
-  }
+/******menu*********/
+nav {
+	margin: 27px auto 0;
 
+	position: relative;
+	width: 400px;
+	height: 50px;
+	background-color: #e28024;
+	border-radius: 8px;
+	font-size: 0;
+}
+nav a {
+	line-height: 50px;
+	height: 50%;
+	font-size: 15px;
+	display: inline-block;
+	position: relative;
+	z-index: 1;
+	text-decoration: none;
+	text-transform: uppercase;
+	text-align: center;
+	color: white;
+	cursor: pointer;
+}
+nav .animation {
+	position: absolute;
+	height: 100%;
+	top: 0;
+	z-index: 0;
+	transition: all .5s ease 0s;
+	border-radius: 8px;
+}
+a:nth-child(1) {
+	width: 100px;
+}
+a:nth-child(2) {
+	width: 100px;
+}
+a:nth-child(3) {
+	width: 100px;
+}
+a:nth-child(4) {
+	width: 100px;
+}
+
+nav .start-home, a:nth-child(1):hover~.animation {
+	width: 100px;
+	left: 0;
+	background-color: #e74c3c;
+}
+nav .start-about, a:nth-child(2):hover~.animation {
+	width: 100px;
+	left: 100px;
+	background-color: #e73cbc;
+}
+nav .start-blog, a:nth-child(3):hover~.animation {
+	width: 100px;
+	left: 200px;
+	background-color: #1abc9c;
+}
+nav .start-portefolio, a:nth-child(4):hover~.animation {
+	width: 100px;
+	left: 300px;
+	background-color: #2f22e6;
+}
+
+
+body {
+	font-size: 12px;
+	font-family: sans-serif;
+	background: #2c3e50;
+}
+
+h1 {
+	margin: 40px 0 40px;
+	text-align: center;
+	font-size: 30px;
+	color: #ecf0f1;
+	text-shadow: 2px 2px 4px #000000;
+	font-family: 'Cherry Swash', cursive;
+}
+
+span {
+    color: #2BD6B4;
+}
+/******menu*********/
+.home {
+    text-align: center;
+}
   .myButton {
 	box-shadow: 0px 1px 0px 0px #fff6af;
 	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
@@ -41,6 +102,7 @@
 	padding:20px 35px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #ffee66;
+
 }
 .myButton:hover {
 	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
@@ -51,6 +113,46 @@
 	top:1px;
 }
 
+#commentForm {
+	width: 500px;
+}
+#commentForm label {
+	width: 250px;
+}
+#commentForm label.error, #commentForm input.submit {
+	margin-left: 253px;
+}
+#signupForm {
+	width: 670px;
+}
+#signupForm label.error {
+	margin-left: 10px;
+	width: auto;
+	display: inline;
+}
+#newsletter_topics label.error {
+	display: none;
+	margin-left: 103px;
+}
+
+.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+  }
+		
+  p {
+	text-align: center;
+	display: block;
+	margin-top: 1em;
+	margin-bottom: 1em;
+	margin-left: 0;
+	margin-right: 0;
+	font-family: cursive;
+	font-size: 20px;
+	color:#ffa91e;
+  }
 #score, #time, #lives
 {
     display:inline;
