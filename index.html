@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css" />
 	<script src="./jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="./app.js"></script>
+	
 </head>
 
 
@@ -18,7 +19,7 @@
 		<header>
 			<h1>pacMan</h1>
 			<p>Ovadia Ido Efroni, id:204677777
-				Inon Ben Zikri , id:2044
+				Inon Ben Zikri , id:204439806
 			</p>
 		</header>
 	</article>
@@ -31,17 +32,25 @@
 		<a href="#" onclick="">about</a>
 	</div>
 
-	<div id="score" style="display: block;">
-		<label for="lblScore">SCORE:</label>
-		<input id="lblScore" type="text" />
+	<div id = "block_container">
+		<div id="score" style="display: none;">
+			<label for="lblScore">SCORE:</label>
+			<input id="lblScore" type="text" />
+		</div>
+		<div id="time" style="display: none;">
+			<label for="lblTime">REM TIME:</label>
+			<input id="lblTime" type="text" />
+		</div>
+		<div id="lives" style="display: none;">
+			<label for="lblLives">REM LIVES:</label>
+			<input id="lblLives" type="text" />
+		</div>
+		<div id="game" class= "board" style="display: none;">
+			<canvas id="canvas" class= "canvas-layer" height="600" width="600"></canvas>
+			<canvas id="canvas2" class= "canvas-layer"  height="600" width="600"></canvas>
+		</div>
 	</div>
-	<div id="time" style="display: block;">
-		<label for="lblTime">TIME:</label>
-		<input id="lblTime" type="text" />
-	</div>
-	<div id="game" style="display: block;">
-		<canvas id="canvas" height="600" width="600"></canvas>
-	</div>
+	
 
 
 	<!-- ido code  -->
@@ -57,7 +66,7 @@
 
 
 	<div id="Register" style="display: none;">
-		<form class="Register" id="RegiForm" form onsubmit="tryRegister()">
+		<form class="Register" id="RegiForm" form >
 			<label for="UserName">UserName:</label><br>
 			<input type="text" id="UserName" name="UserName" value=""><br>
 			<label for="Password">Password:</label><br>
@@ -68,7 +77,8 @@
 			<input type="text" id="Email" name="Email" value=""><br>
 			<label for="start">date of birth:</label><br>
 			<input type="date" id="BirthDate" name="BirthDate" min="1990-01-01" max="2020-04-31"><br><br>
-			<input type="submit" value="Submit">
+			<button type="button" onclick="tryRegister()">submit</button>
+
 		</form>
 	</div>
 
@@ -86,7 +96,7 @@
 	</div>
 
 	<div id="Preferences" style="display: none;">
-		<form onsubmit="preferences()" id="preferencesForm">
+		<form id="preferencesForm">
 		<label for="UpKey">Enter Up Key:</label><br>
 		<input type="text" id="UpKey" name="UpKey" value="up arrow" onkeypress="functionUpKey(event)"><br>
 		<label for="DownKey">Enter Down Key:</label><br>
@@ -108,9 +118,10 @@
 		<label for="monsterAmount">Enter a number of monster(ghosts) in the game(between 1 and 4):</label><br>
 		<input type="number" id="monsterAmount" name="monsterAmount" min="1" max="4" value ="1"><br>
 		<label for="RandomButton">Press to filled Random Values to the game:</label><br><br>
-		<button type="RandomButton" onclick="RandomValues()">Random!</button>
+		<button type="button" onclick="RandomValues()">Random!</button>
 		<br><br>
-		<input type="submit" value="Submit">
+		<button type="button" onclick="preferences()">submit</button>
+
 	</form>
 	</div>
 
@@ -118,10 +129,9 @@
 		<p>Posted by: Ovadia Ido Efroni & Inon Ben Zikri</p>
 		<p>Contact information: <a href="mailto:efronio@post.bgu.ac.il">
 				efronio@post.bgu.ac.il</a>.
-			<a href="mailto:inon@post.bgu.ac.il">
-				inon@post.bgu.ac.il</a>.</p>
+			<a href="mailto:inonbenz@post.bgu.ac.il">
+				inonbenz@post.bgu.ac.il</a>.</p>
 	</footer>
-
 
 
 
