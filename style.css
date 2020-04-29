@@ -443,5 +443,9 @@ footer {
 	display: inline;
 	
 	color: rgb(255, 0, 0);
-}
+  }
 
+#newGame{
+	text-align: center;
+	position: relative;
+}
