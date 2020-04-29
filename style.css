@@ -180,3 +180,8 @@ footer {
     font-size: small;
     width:100%;
 }
+
+#newGame{
+	text-align: center;
+	position: relative;
+}
