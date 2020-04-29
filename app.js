@@ -11,16 +11,15 @@ var time_elapsed;
 var interval;
 var interval2;
 var interval3;
-//ido added
 var List = new Array();
 var personP = { userName: "p", password: "p", firstName: "p", lastName: "p", email: "p@gmai.com", date: "11/9/93" };
 List.push(personP);
-///
+
+///images for the game 
 var myImage = new Image();
 var cherry = new Image();
 myImage.src = 'pacManRight.png';
 cherry.src = 'cherry.png';
-
 var glow = new Image();
 glow.src = 'glow.gif';
 
@@ -50,20 +49,8 @@ $(document).ready(function () {
 	context = c1.getContext("2d");
 	var c2 = document.getElementById('canvas2');
   	context2 = c2.getContext("2d");
-
-
 	//Start the PakMan game
 	Initialize();
-	/* 	var personP = { userName: "p", password: "p" ,fullName:"p.p",email:"p@gmai.com",date:"11/9/93" }
-		List.push(personP);
-		document.getElementById("Login").style.display = 'none';
-		document.getElementById("Register").style.display = 'none';
-		document.getElementById("Preferences").style.display = 'none';
-		document.getElementById("Welcome").style.display = 'none';
-	 */
-	//Register();
-
-	//Start();
 });
 
 $(document).on("click", "container",function(event) {
@@ -82,8 +69,10 @@ $(document).keydown(function(e) {
 	}
   });
 
- 
-  
+ /**
+  * this function initialize the divs screen and display the welcome screen 
+  *
+  */
 function Initialize() {
 	document.getElementById("Welcome").style.display = 'block';
 	document.getElementById("score").style.display = 'none';
@@ -93,10 +82,12 @@ function Initialize() {
 	document.getElementById("Login").style.display = 'none';
 	document.getElementById("Register").style.display = 'none';
 	document.getElementById("Preferences").style.display = 'none';
-	var personP = { userName: "p", password: "p", fullName: "p.p", email: "p@gmai.com", date: "11/9/93" }
-	List.push(personP);
+	//var personP = { userName: "p", password: "p", fullName: "p.p", email: "p@gmai.com", date: "11/9/93" }
+	//List.push(personP);
 }
-
+/**
+ * this function displat the welcome screen 
+ */
 function Welcome() {
 	var x = document.getElementById("Welcome");
 	if (x.style.display === "none") {
@@ -112,9 +103,10 @@ function Welcome() {
 		//	x.style.display = "none";
 	}
 }
-
+/**
+ * this function open the registration form div 
+ */
 function Register() {
-
 	var x = document.getElementById("Register");
 	//if (x.style.display === "none") {
 	x.style.display = "block";
@@ -124,6 +116,7 @@ function Register() {
 	document.getElementById("lives").style.display = 'none';
 	document.getElementById("time").style.display = 'none';
 	document.getElementById("game").style.display = 'none';
+	document.getElementById("Preferences").style.display = 'none';
 
 	$("#commentForm").submit(function (e) {
 		e.preventDefault();
@@ -131,6 +124,9 @@ function Register() {
 	})
 
 }
+/**
+ * this function validate the registration form details 
+ */
 function validation() {
 	var UserNameR = $('#Register').find('input[name="UserName"]').val();
 	var cemail = $('#Register').find('input[name="email"]').val();
@@ -162,7 +158,10 @@ function validation() {
 	Login();
 	}
 }
-
+/**
+ * this function verify if the user is in the system 
+ * @param {*} str 
+ */
 function isInSystem(str) {
 	for (var i = 0; i < List.length; i++) {
 		if (List[i].userName == str) {
@@ -171,7 +170,10 @@ function isInSystem(str) {
 	}
 	return true;
 }
-
+/**
+ * this function verify if the string contain only letters in the alfa bet
+ * @param {*} str 
+ */
 function isAlpha(str) {
 	var code, i, len;
 	for (i = 0, len = str.length; i < len; i++) {
@@ -182,31 +184,37 @@ function isAlpha(str) {
 	}
 	return true;
 }
-
+/**
+ * this function display the login div
+ */
 function Login() {
-
 	if (document.getElementById("Login").style.display === "none") {
 		document.getElementById("Login").style.display = 'block';
 	}
 	if (document.getElementById("Welcome").style.display != 'none') {
 		document.getElementById("Welcome").style.display = 'none';
 	}
-	if (document.getElementById("Register").style.display != 'none') {
+	if (document.getElementById("Register").style.display == 'block') {
 		document.getElementById("Register").style.display = 'none';
 	}
+	if (document.getElementById("Preferences").style.display == 'block') {
+		document.getElementById("Preferences").style.display = 'none';
+	}
+	$("#LoginForm").submit(function (e) {
+		e.preventDefault();
+	})
 	/**
 	document.getElementById("score").style.display = 'none';
 	document.getElementById("time").style.display = 'none';
 	document.getElementById("game").style.display = 'none';
 	 */
 }
-
+/**
+ * thid function verify the user details when the user try to log in
+ */
 function tryToLog() {
 	var userN = $('#Login').find('input[name="UserNameLog"]').val();
 	var userP = $('#Login').find('input[name="PasswordLog"]').val();
-
-	//var userN = document.getElementById("UserNameLog").value;
-	//var UserP = document.getElementById("PasswordLog").value;
 	if (userN == "" || userP == "" || userN == null || userP == null) {
 		alert("please fill the missing fileds");
 		$('#Login').find('input[name="UserNameLog"]').val("");
@@ -225,6 +233,9 @@ function tryToLog() {
 			return false;
 	}
 }
+/**
+ * this function show the preferences div
+ */
 function showPreferences() {
 	//clear the screen 
 	var x = document.getElementById("Preferences");
@@ -243,21 +254,29 @@ function showPreferences() {
 	} if (Register.style.display == 'block') {
 		Register.style.display = 'none'
 	}
-	/*
-	document.getElementById("Preferences").style.display = 'block';
-	document.getElementById("Welcome").style.display = 'none';
-	document.getElementById("Login").style.display = 'none';
-	document.getElementById("Register").style.display = 'none';
-	*/
+	$("#preferencesForm").submit(function (e) {
+		e.preventDefault();
+		preferences();
+	})
+	
+	document.getElementById("score").style.display = 'none';
+	document.getElementById("time").style.display = 'none';
+	document.getElementById("lives").style.display = 'none';
+	document.getElementById("game").style.display = 'none';
+
+	
 }
+/**
+ * this function set the details of the preferences form in the global veriable of the game
+ */
 function preferences() {
 
-	foodNum = $('#Preferences').find('input[name="PelletsNum"]').val();
+	foodNum = $('#Preferences').find('input[name="PelletsNumInputName"]').val();
 	fiveFoodColor = $('#Preferences').find('input[name="fivePellet"]').val();
 	fifteenFoodColor = $('#Preferences').find('input[name="fifteenPellet"]').val();
 	twentyFiveFoodColor = $('#Preferences').find('input[name="twentyfivePellet"]').val();
 	timeLimit = $('#Preferences').find('input[name="timeLimit"]').val();
-	monsterAmount = $('#Preferences').find('input[name="monsterAmount"]').val();
+	monsterAmount = $('#Preferences').find('input[name="monsterInputName"]').val();
 	if (foodNum == "" || fiveFoodColor == "" || fifteenFoodColor == ""||twentyFiveFoodColor =="" || timeLimit == "" || monsterAmount == "") {
 		alert("please enter all of the missing details");
 	} else {
@@ -265,11 +284,13 @@ function preferences() {
 	}
 
 }
-
-
+/**
+ * this function randomaize the values in the preferece form 
+ */
 function RandomValues() {
 	foodNum = getRandomInt(50, 90);
-	$('#Preferences').find('input[name="PelletsNum"]').val(foodNum);
+	$('#Preferences').find('input[name="PelletsNumInputName"]').val(foodNum);
+	$('#Preferences').find('output[name="PelletsNumOutPutName"]').val(foodNum);
 	fiveFoodColor = getRandomColor;
 	$('#Preferences').find('input[name="fivePellet"]').val(fiveFoodColor);
 	fifteenFoodColor = getRandomColor;
@@ -279,11 +300,20 @@ function RandomValues() {
 	timeLimit = getRandomInt(60, 1000);
 	$('#Preferences').find('input[name="timeLimit"]').val(timeLimit);
 	monsterAmount = getRandomInt(1, 4);
-	$('#Preferences').find('input[name="monsterAmount"]').val(monsterAmount);
+	$('#Preferences').find('input[name="monsterInputName"]').val(monsterAmount);
+	$('#Preferences').find('output[name="monsterOutPutName"]').val(monsterAmount);
 }
+/**
+ * this function randomize a random number according to the min and max allowed values 
+ * @param {the min value} min 
+ * @param {the max value} max 
+ */
 function getRandomInt(min, max) {
 	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+/**
+ * this function get a random color
+ */
 function getRandomColor() {
 	var letters = '0123456789ABCDEF';
 	var color = '#';
@@ -292,31 +322,48 @@ function getRandomColor() {
 	}
 	return color;
 }
-
+/**
+ * this function set the random color
+ */
 function setRandomColor() {
 	$("#colorpad").css("background-color", getRandomColor());
 }
-
+/**
+ * this function set the up key press 
+ * @param {*} event 
+ */
 function functionUpKey(event) {
 	upKey = event.which || event.keyCode;
 	sessionStorage.setItem("upKey", upKey.toString());
 }
+/**
+ * this function set the down key press 
+ * @param {*} event 
+ */
 function functionDownKey(event) {
 	downKey = event.which || event.keyCode;
 	sessionStorage.setItem("downKey", downKey.toString());
-
 }
+/**
+ * this function set the left key press 
+ * @param {*} event 
+ */
 function functionLeftKey(event) {
 	leftKey = event.which || event.keyCode;
 	sessionStorage.setItem("leftKey", leftKey.toString());
-
 }
+/**
+ * this function set the right key prees 
+ * @param {*} event 
+ */
 function functionRightKey(event) {
 	rightKey = event.which || event.keyCode;
 	sessionStorage.setItem("rightKey", rightKey.toString());
 
 }
-
+/**
+ * this function display the start div 
+ */
 function StartGame() {
 	document.getElementById("Welcome").style.display = 'none';
 	document.getElementById("Login").style.display = 'none';

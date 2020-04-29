@@ -1,4 +1,13 @@
 /******menu*********/
+
+body{
+    margin: 0;
+    padding: 0;
+    background: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    font-family: sans-serif;
+}
 nav {
 	margin: 27px auto 0;
 
@@ -65,12 +74,6 @@ nav .start-portefolio, a:nth-child(4):hover~.animation {
 }
 
 
-body {
-	font-size: 12px;
-	font-family: sans-serif;
-	background: #2c3e50;
-}
-
 h1 {
 	margin: 40px 0 40px;
 	text-align: center;
@@ -87,6 +90,7 @@ span {
 .home {
     text-align: center;
 }
+
   .myButton {
 	box-shadow: 0px 1px 0px 0px #fff6af;
 	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
@@ -113,29 +117,9 @@ span {
 	top:1px;
 }
 
-#commentForm {
-	width: 500px;
-}
-#commentForm label {
-	width: 250px;
-}
-#commentForm label.error, #commentForm input.submit {
-	margin-left: 253px;
-}
-#signupForm {
-	width: 670px;
-}
-#signupForm label.error {
-	margin-left: 10px;
-	width: auto;
-	display: inline;
-}
-#newsletter_topics label.error {
-	display: none;
-	margin-left: 103px;
-}
 
-.center {
+
+.centerLogo {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
@@ -153,6 +137,280 @@ span {
 	font-size: 20px;
 	color:#ffa91e;
   }
+/*********form-box style**********/
+
+.form-box{
+    width: 320px;
+    height: 340px;
+	background:rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 58%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 0px 30px;
+}
+
+h1{
+    margin: 0;
+    padding: 0 0 0px;
+    text-align: center;
+    font-size: 22px;
+}
+.form-box p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.form-box input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.form-box input[type="text"], input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+.form-box input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.form-box input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+}
+
+.form-box a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+}
+.form-box a:hover
+{
+    color: #39dc79;
+}
+
+/********************/
+
+/********registration-Form style************/
+
+.registration-Form{
+    width: 800px;
+    height: 300px;
+	background:rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 0px 30px;
+}
+
+
+.registration-Form p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.registration-Form input{
+    width: 80%;
+    margin-bottom: 20px;
+}
+.registration-Form input[type="text"],input[type="password"],input[type="email"],input[type="date"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+.registration-Form input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.registration-Form input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+}
+
+.registration-Form a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+}
+.registration-Form a:hover
+{
+    color: #39dc79;
+}
+
+
+/*********************/
+
+.Preferences-Form{
+    width: 1400px;
+    height: 400px;
+	background:rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 60%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 0px 30px;
+}
+
+
+.Preferences-Form p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+.Preferences-Form input{
+    width: 80%;
+    margin-bottom: 20px;
+}
+.Preferences-Form input[type="text"],input[type="number"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 40px;
+    color: #fff;
+    font-size: 16px;
+}
+.Preferences-Form input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #1c8adb;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+
+.Preferences-Form input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #39dc79;
+    color: #000;
+}
+.Preferences-Form input[type="color"]
+{
+	width: 25px;
+    margin-bottom: 20px;
+}
+.Preferences-Form a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #fff;
+}
+.Preferences-Form a:hover
+{
+    color: #39dc79;
+}
+
+/*********************/
+
+.bRandom {
+	box-shadow: 3px 4px 0px 0px #276873;
+	background:linear-gradient(to bottom, #599bb3 5%, #408c99 100%);
+	background-color:#599bb3;
+	border-radius:15px;
+	border:1px solid #29668f;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:14px;
+	padding:3px 7px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+.bRandom:hover {
+	background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	background-color:#408c99;
+}
+.bRandom:active {
+	position:relative;
+	top:1px;
+}
+
+        
+        
+
+
+
+
+.slidecontainer {
+	width: 150px;
+  }
+  
+  .slider {
+	-webkit-appearance: none;
+	width: 100%;
+	height: 25px;
+	background: #d3d3d3;
+	outline: none;
+	opacity: 0.7;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
+  }
+  
+  .slider:hover {
+	opacity: 1;
+  }
+  
+  .slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 25px;
+	height: 25px;
+	background: #4CAF50;
+	cursor: pointer;
+  }
+  
+  .slider::-moz-range-thumb {
+	width: 25px;
+	height: 25px;
+	background: #4CAF50;
+	cursor: pointer;
+  }
+
+
+
+
+
+
+
+/*********************/
+
 #score, #time, #lives
 {
     display:inline;
@@ -170,13 +428,20 @@ span {
 #canvas2 {
 	position: absolute; left: 0; top: 0; z-index:1; 
 }
-		
+
+
 footer {
-    bottom: 0;
-    color: #707070;
-    height: 2em;
-    left: 0;
-    position: relative;
-    font-size: small;
-    width:100%;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	color: white;
+	text-align: center;	
+  }
+
+  output {
+	display: inline;
+	
+	color: rgb(255, 0, 0);
 }
+
