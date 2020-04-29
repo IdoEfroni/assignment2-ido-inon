@@ -18,6 +18,7 @@ var interval=null;
 var interval2;
 var interval3;
 var interval4;
+var interval5;
 var song;
 //ido added
 var List = new Array();
@@ -32,6 +33,9 @@ var cherry = new Image();
 cherry.src = 'cherry.png';
 var glow = new Image();
 glow.src = 'glow.gif';
+
+var heart = new Image();
+heart.src = 'heart.png';
 
 var ghost1Img = new Image();
 ghost1Img.src = 'ghost1.jpg';
@@ -518,11 +522,13 @@ function Start() {
 		interval = setInterval(UpdatePosition, 100);
 		interval4 = setInterval(ghostsUpdate,500);
 		interval2 = setInterval(putCherry, 7000);
+		interval5 = setInterval(putHeart, 20000);
 		interval3 = setInterval(putGlow, 10000);
 	})
 
 }
 
+//start new game via game window
 function newGame(){
 
 	if(!isEmpty(glowObject)){
@@ -538,14 +544,16 @@ function newGame(){
 	Start();
 }
 
+//update ghosts positions
 function ghostsUpdate(){
 
 	ghosts.forEach(ghost => ghostsPositionReset(ghost));
 	ghosts.forEach(ghost=>moveGhost(ghost));
 }
 
+// put the running bonus of 50 points
 function putGlow(){
-	//remove previous cherry
+	
 	let hasGlow= false;
 	for(var i =0;i<20;i++){
 		for(var j=0;j<20;j++){
@@ -632,6 +640,25 @@ function putCherry(){
 
 }
 
+function putHeart(){
+	//remove previous cherry
+	let hasHeart= false;
+	for(var i =0;i<20;i++){
+		for(var j=0;j<20;j++){
+			if(board[i][j]==35){
+				board[i][j] =0;
+				hasHeart = true;
+			}
+		}
+	}
+	if(hasHeart==false){
+		let emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 35;
+	}
+
+}
+
+
 function foodDistribution(foodArray){
 	//let foodPercent = [5:foodArray[fiveFoodColor].currentPercent, 15:foodArray[fifteenFoodColor].currentPercent,25:foodArray[twentyFiveFoodColor].currentPercent];
 	foodArray.sort(function(a,b){return a.currentPercent-b.currentPercent});
@@ -707,6 +734,8 @@ function Draw() {
 				context.fill();
 			} if (board[i][j] == 100) {
 				context.drawImage(cherry,center.x-15,center.y-15,30,30);
+			}if (board[i][j] == 35) {
+				context.drawImage(heart,center.x-15,center.y-15,30,30);
 			} if (board2[i][j] == 50) {
 				context2.drawImage(glow,center.x-15,center.y-15,30,30);
 			} if (board[i][j] == 4) {
@@ -754,6 +783,9 @@ function UpdatePosition() {
 			score=score +25;
 			food_current--;
 		}
+		if (board[shape.i][shape.j] == 35) {
+			lives++;
+		}
 		if (board[shape.i][shape.j] == 100) {
 			score=score +100;
 		}
@@ -788,7 +820,8 @@ function UpdatePosition() {
 	ghosts.forEach(ghost=>checkFail(ghost));
 
 	var currentTime = new Date();
-	time_elapsed = ((timeLimit*1000)-(currentTime - start_time)) / 1000;
+	let time = parseInt((((timeLimit*1000)-(currentTime - start_time)) / 1000),10);
+	time_elapsed = time;
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
@@ -833,7 +866,8 @@ function gameEnded(){
 	interval3 = null;
 	clearInterval(interval4);
 	interval4 = null;
-
+	clearInterval(interval5);
+	interval5 = null;
 
 	song.pause();
 	song.currentTime =0;
@@ -870,14 +904,17 @@ function moveGhost(ghost){
 	if((shape.i - ghost.i <0) && (shape.j-ghost.j<0)){
 		x = tossCoin(1,3);
 	}
-	if((shape.i - ghost.i <0) && (shape.j-ghost.j>=0)){
+	else if((shape.i - ghost.i <0) && (shape.j-ghost.j>=0)){
 		x = tossCoin(2,3);
 	}
-	if((shape.i - ghost.i >=0) && (shape.j-ghost.j<0)){
+	else if((shape.i - ghost.i >=0) && (shape.j-ghost.j<0)){
 		x = tossCoin(1,4);
 	}
-	if((shape.i - ghost.i >=0) && (shape.j-ghost.j>0)){
+	else if((shape.i - ghost.i >=0) && (shape.j-ghost.j>0)){
 		x = tossCoin(2,4);
+	}
+	else if(shape.j == ghost.j){
+		x= 4;
 	}
 	moveObject(x,ghost);
 	board2[ghost.i][ghost.j]=ghost.num;
