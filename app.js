@@ -676,6 +676,7 @@ function GetKeyPressed() {
 	}
 }
 
+//drawing the objects that placed on the board 
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	canvas2.width = canvas2.width;
@@ -729,6 +730,8 @@ function Draw() {
 		}
 	}
 }
+
+// interval that updates the positions of the object on the board
 
 function UpdatePosition() {
 	if(!isEmpty(shape)){
