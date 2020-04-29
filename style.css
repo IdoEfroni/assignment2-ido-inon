@@ -7,7 +7,9 @@ body{
     background-size: cover;
     background-position: center;
     font-family: sans-serif;
+    zoom: 90%;
 }
+
 nav {
 	margin: 27px auto 0;
 
@@ -144,7 +146,7 @@ span {
     height: 340px;
 	background:rgba(0, 0, 0, 0.5);
     color: #fff;
-    top: 58%;
+    top: 52%;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
@@ -213,14 +215,13 @@ h1{
     height: 300px;
 	background:rgba(0, 0, 0, 0.5);
     color: #fff;
-    top: 60%;
+    top: 52%;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
     box-sizing: border-box;
     padding: 0px 30px;
 }
-
 
 .registration-Form p{
     margin: 0;
@@ -276,7 +277,7 @@ h1{
     height: 400px;
 	background:rgba(0, 0, 0, 0.5);
     color: #fff;
-    top: 60%;
+    top: 56%;
     left: 50%;
     position: absolute;
     transform: translate(-50%,-50%);
@@ -362,12 +363,6 @@ h1{
 	top:1px;
 }
 
-        
-        
-
-
-
-
 .slidecontainer {
 	width: 150px;
   }
@@ -404,31 +399,35 @@ h1{
   }
 
 
-
-
-
-
-
 /*********************/
-
+/*
 #score, #time, #lives
 {
     display:inline;
 }
-
+*/
 .board {
 	position: relative 
 }
 
 #canvas {
-	background-color: #000;
+	background-color: rgba(0, 0, 0, 0.95);
 	position: absolute; left: 0; top: 0; z-index: 0; 
 }
 #canvas2 {
 	position: absolute; left: 0; top: 0; z-index:1; 
 }
 
+canvas {
+    height:400px;
+    width: 800px;
+}
 
+#game {
+    width: 800px;
+    height:100px;
+    margin: 0px auto;
+  }
 footer {
 	position: fixed;
 	left: 0;
@@ -444,7 +443,72 @@ footer {
 	color: rgb(255, 0, 0);
   }
 
-#newGame{
-	text-align: center;
-	position: relative;
+  .input_class { 
+    border: none;
+    background: #001aff9d;
+    outline: none;
+    height: 40px;
+    width: 100px;
+    color: rgb(19, 17, 17);
+    font-size: 20px;
+    font-style: initial;
+  }
+  #game_data{
+    position: relative;
+    top:0px;  
+    left:560px;
+  }
+  .label_class{
+    font-family: Impact, Charcoal, sans-serif;
+    font-size: 28px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: #000000;
+    font-weight: 700;
+    text-decoration: underline solid rgb(68, 68, 68);
+    font-style: normal;
+    font-variant: normal;
+    text-transform: capitalize;
+  }
+  
+.gameButton {
+    position: absolute;
+    top:400px;  
+    left:1252px;
+	box-shadow: 3px 4px 0px -1px #1564ad;
+	background:linear-gradient(to bottom, #79bbff 5%, #001aff9d 100%);
+	background-color:#79bbff;
+	border-radius:8px;
+	border:2px solid #337bc4;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Courier New;
+	font-size:25px;
+	font-weight:bold;
+	padding:16px 51px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #528ecc;
 }
+.gameButton:hover {
+	background:linear-gradient(to bottom, #378de5 5%, #79bbff 100%);
+	background-color:#378de5;
+}
+.gameButton:active {
+	position:relative;
+	top:5px;
+}
+
+.game_details{
+    width: 350px;
+    height: 350px;
+	background:rgba(0, 0, 0, 0.5);
+    color: #fff;
+    top: 52%;
+    left: 180px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 0px 30px;
+}
+       
