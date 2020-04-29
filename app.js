@@ -33,11 +33,11 @@ var glow = new Image();
 glow.src = 'glow.gif';
 
 var ghost1Img = new Image();
-ghost1Img.src = 'ghost1.jpg';
+ghost1Img.src = 'ghost1.png';
 var ghost2Img = new Image();
-ghost2Img.src = 'ghost2.jpg';
+ghost2Img.src = 'ghost2.png';
 var ghost3Img = new Image();
-ghost3Img.src = 'ghost3.jpg';
+ghost3Img.src = 'ghost3.png';
 var ghost4Img = new Image();
 ghost4Img.src = 'ghost4.png';
 
