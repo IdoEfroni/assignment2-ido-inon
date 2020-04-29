@@ -14,7 +14,7 @@ var score;
 var pac_color;
 var start_time;
 var time_elapsed;
-var interval=null;
+var interval = null;
 var interval2;
 var interval3;
 var interval4;
@@ -38,11 +38,11 @@ var heart = new Image();
 heart.src = 'heart.png';
 
 var ghost1Img = new Image();
-ghost1Img.src = 'ghost1.jpg';
+ghost1Img.src = 'ghost1.png';
 var ghost2Img = new Image();
-ghost2Img.src = 'ghost2.jpg';
+ghost2Img.src = 'ghost2.png';
 var ghost3Img = new Image();
-ghost3Img.src = 'ghost3.jpg';
+ghost3Img.src = 'ghost3.png';
 var ghost4Img = new Image();
 ghost4Img.src = 'ghost4.png';
 
@@ -58,10 +58,10 @@ var twentyFiveFood;
 var timeLimit = 60;
 var monsterAmount = 1;
 var lives = 5;
-sessionStorage.setItem("leftKey","37");
-sessionStorage.setItem("upKey","38");
-sessionStorage.setItem("rightKey","39");
-sessionStorage.setItem("downKey","40");
+sessionStorage.setItem("leftKey", "37");
+sessionStorage.setItem("upKey", "38");
+sessionStorage.setItem("rightKey", "39");
+sessionStorage.setItem("downKey", "40");
 var leftKey = 37;
 var upKey = 38;
 var rightKey = 39;
@@ -71,8 +71,8 @@ $(document).ready(function () {
 	var c1 = document.getElementById('canvas')
 	context = c1.getContext("2d");
 	var c2 = document.getElementById('canvas2');
-	  context2 = c2.getContext("2d");
-	  
+	context2 = c2.getContext("2d");
+
 	$("#preferencesForm").submit(function (e) {
 		e.preventDefault();
 		preferences();
@@ -87,28 +87,28 @@ $(document).ready(function () {
 	Initialize();
 });
 
-$(document).on("click", "container",function(event) {
+$(document).on("click", "container", function (event) {
 	$(this).hide(); // hide when clicked
 	$('.modal-backdrop').hide();
 	$('container').hide();
 
-  });
+});
 
 //close about on escape key
-$(document).keydown(function(e) {
+$(document).keydown(function (e) {
 	var code = e.keyCode || e.which;
-	if (code == 27){
-		 $("#myModal").hide();
-		 $('.modal-backdrop').hide();
+	if (code == 27) {
+		$("#myModal").hide();
+		$('.modal-backdrop').hide();
 	}
-  });
-  
+});
 
 
- /**
-  * this function initialize the divs screen and display the welcome screen 
-  *
-  */
+
+/**
+ * this function initialize the divs screen and display the welcome screen 
+ *
+ */
 function Initialize() {
 	document.getElementById("Welcome").style.display = 'block';
 	document.getElementById("score").style.display = 'none';
@@ -119,6 +119,8 @@ function Initialize() {
 	document.getElementById("Login").style.display = 'none';
 	document.getElementById("Register").style.display = 'none';
 	document.getElementById("Preferences").style.display = 'none';
+	document.getElementById("gameDetails").style.display = 'none';
+
 	//var personP = { userName: "p", password: "p", fullName: "p.p", email: "p@gmai.com", date: "11/9/93" }
 	//List.push(personP);
 }
@@ -137,6 +139,8 @@ function Welcome() {
 		document.getElementById("Login").style.display = 'none';
 		document.getElementById("Register").style.display = 'none';
 		document.getElementById("Preferences").style.display = 'none';
+		document.getElementById("gameDetails").style.display = 'none';
+
 		//} else {
 		//	x.style.display = "none";
 	}
@@ -155,6 +159,9 @@ function Register() {
 	document.getElementById("time").style.display = 'none';
 	document.getElementById("game").style.display = 'none';
 	document.getElementById("newGame").style.display = 'none';
+	document.getElementById("Preferences").style.display = 'none';
+	document.getElementById("gameDetails").style.display = 'none';
+
 
 }
 /**
@@ -186,9 +193,9 @@ function validation() {
 	else if (isInSystem(UserNameR) == false) {
 		alert("user Name alrady exist");
 		return false;
-	}else{
-	List.push(tempPerson);
-	Login();
+	} else {
+		List.push(tempPerson);
+		Login();
 	}
 }
 /**
@@ -233,6 +240,8 @@ function Login() {
 	if (document.getElementById("Preferences").style.display == 'block') {
 		document.getElementById("Preferences").style.display = 'none';
 	}
+	document.getElementById("gameDetails").style.display = 'none';
+
 	$("#LoginForm").submit(function (e) {
 		e.preventDefault();
 	})
@@ -256,14 +265,15 @@ function tryToLog() {
 	} else {
 		for (var i = 0; i < List.length; i++) {
 			if (List[i].userName == userN && List[i].password == userP) {
+				$('#gameDetails').find('output[name="displayUserName"]').val(userN);
 				showPreferences();
 				return true;
 			}
 		}
 		alert("please enter correct User-name/Password");
-			$('#Login').find('input[name="UserNameLog"]').val("");
-			$('#Login').find('input[name="PasswordLog"]').val("");
-			return false;
+		$('#Login').find('input[name="UserNameLog"]').val("");
+		$('#Login').find('input[name="PasswordLog"]').val("");
+		return false;
 	}
 }
 
@@ -289,13 +299,13 @@ function showPreferences() {
 	} if (Register.style.display == 'block') {
 		Register.style.display = 'none'
 	}
-	
+
 	document.getElementById("score").style.display = 'none';
 	document.getElementById("time").style.display = 'none';
 	document.getElementById("lives").style.display = 'none';
 	document.getElementById("game").style.display = 'none';
 
-	
+
 }
 /**
  * this function set the details of the preferences form in the global veriable of the game
@@ -308,9 +318,24 @@ function preferences() {
 	twentyFiveFoodColor = $('#Preferences').find('input[name="twentyfivePellet"]').val();
 	timeLimit = $('#Preferences').find('input[name="timeLimit"]').val();
 	monsterAmount = $('#Preferences').find('input[name="monsterInputName"]').val();
-	if (foodNum == "" || fiveFoodColor == "" || fifteenFoodColor == ""||twentyFiveFoodColor =="" || timeLimit == "" || monsterAmount == "") {
+	if (foodNum == "" || fiveFoodColor == "" || fifteenFoodColor == "" || twentyFiveFoodColor == "" || timeLimit == "" || monsterAmount == "") {
 		alert("please enter all of the missing details");
 	} else {
+		if (upKey!=38) {
+			$('#gameDetails').find('output[name="displayUpKey"]').val(String.fromCharCode((96 <= upKey && upKey <= 105) ? upKey - 48 : upKey));
+		} if (downKey!=40) {
+			$('#gameDetails').find('output[name="displayDownKey"]').val(String.fromCharCode((96 <= downKey && downKey <= 105) ? downKey - 48 : downKey));
+		} if (rightKey!=39) {
+			$('#gameDetails').find('output[name="displayRighthKey"]').val(String.fromCharCode((96 <= rightKey && rightKey <= 105) ? rightKey - 48 : rightKey));
+		} if (leftKey!=37) {
+			$('#gameDetails').find('output[name="displayLeftKey"]').val(String.fromCharCode((96 <= leftKey && leftKey <= 105) ? leftKey - 48 : leftKey));
+		}
+		$('#gameDetails').find('output[name="displayPelletsNum"]').val(foodNum);
+		$('#gameDetails').find('input[name="displayFivePellet"]').val(fiveFoodColor);
+		$('#gameDetails').find('input[name="displayFifteenPellet"]').val(fifteenFoodColor);
+		$('#gameDetails').find('input[name="displayTwentyfivePellet"]').val(twentyFiveFoodColor);
+		$('#gameDetails').find('output[name="displayTimeLimit"]').val(timeLimit);
+		$('#gameDetails').find('output[name="displayMonsters"]').val(monsterAmount);
 		StartGame();
 	}
 
@@ -363,39 +388,41 @@ function setRandomColor() {
  * this function set the up key press 
  * @param {*} event 
  */
-function functionUpKey(event) {
-	upKey = event.which || event.keyCode;
-	sessionStorage.setItem("upKey", upKey.toString());
+function functionUpKey() {
+	upKey = event.keyCode;
+	//sessionStorage.setItem("upKey", upKey.toString());
 }
 /**
  * this function set the down key press 
  * @param {*} event 
  */
-function functionDownKey(event) {
-	downKey = event.which || event.keyCode;
-	sessionStorage.setItem("downKey", downKey.toString());
+function functionDownKey() {
+	downKey = event.keyCode;
+	//sessionStorage.setItem("downKey", downKey.toString());
 }
 /**
  * this function set the left key press 
  * @param {*} event 
  */
-function functionLeftKey(event) {
-	leftKey = event.which || event.keyCode;
-	sessionStorage.setItem("leftKey", leftKey.toString());
+function functionLeftKey() {
+	leftKey = event.keyCode;
+	//sessionStorage.setItem("leftKey", leftKey.toString());
 }
 /**
  * this function set the right key prees 
  * @param {*} event 
  */
-function functionRightKey(event) {
-	rightKey = event.which || event.keyCode;
-	sessionStorage.setItem("rightKey", rightKey.toString());
+function functionRightKey() {
+	rightKey = event.keyCode;
+	//sessionStorage.setItem("rightKey", rightKey.toString());
 
 }
 /**
  * this function display the start div 
  */
 function StartGame() {
+
+
 	document.getElementById("Welcome").style.display = 'none';
 	document.getElementById("Login").style.display = 'none';
 	document.getElementById("Register").style.display = 'none';
@@ -405,7 +432,9 @@ function StartGame() {
 	document.getElementById("time").style.display = 'block';
 	document.getElementById("game").style.display = 'block';
 	document.getElementById("newGame").style.display = 'block';
-	if(interval !=null){
+	document.getElementById("gameDetails").style.display = 'block';
+
+	if (interval != null) {
 		gameEnded();
 	}
 	Start();
@@ -421,43 +450,43 @@ function Start() {
 	score = 0;
 	pac_color = "yellow";
 	var cnt = 400;
-	food_current=0;
+	food_current = 0;
 	var food_remain = foodNum;
-	var pacman_remain = 1;	
+	var pacman_remain = 1;
 	start_time = new Date();
-	fiveFood= {value:5,frequency:0.6, amount:0};
-	fiveFood.currentPercent = 0-fiveFood.frequency;
-	fifteenFood = {value:15,frequency:0.3, amount:0};
-	fifteenFood.currentPercent = 0-fifteenFood.frequency;
-	twentyFiveFood = {value:25,frequency:0.1, amount:0};
-	twentyFiveFood.currentPercent = 0-twentyFiveFood.frequency;
-	lives =5;
+	fiveFood = { value: 5, frequency: 0.6, amount: 0 };
+	fiveFood.currentPercent = 0 - fiveFood.frequency;
+	fifteenFood = { value: 15, frequency: 0.3, amount: 0 };
+	fifteenFood.currentPercent = 0 - fifteenFood.frequency;
+	twentyFiveFood = { value: 25, frequency: 0.1, amount: 0 };
+	twentyFiveFood.currentPercent = 0 - twentyFiveFood.frequency;
+	lives = 5;
 
-	let foodArray = [fiveFood,fifteenFood,twentyFiveFood];
+	let foodArray = [fiveFood, fifteenFood, twentyFiveFood];
 	for (var i = 0; i < 20; i++) {
 		board[i] = new Array();
 		board2[i] = new Array();
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 20; j++) {
 			if (
-				((i==0 || j==0 || i==19 || j==19)) ||
+				((i == 0 || j == 0 || i == 19 || j == 19)) ||
 				//((j==8) && (i==0 ||i==1 ||i==2 || i==3)) ||
 				//((j==8) && (i==19 ||i==18 ||i==17 || i==16)) ||
 				//((j==11) && (i==0 ||i==1 ||i==2 || i==3) ) ||
 				//((j==11) && (i==19 ||i==18 ||i==17 ||i==16) ) ||
-				(((j>=3) && (j<=5)) && ((i>=3) && (i<=5))) ||
-				(((j>=14) && (j<=16)) && ((i>=14) && (i<=16))) ||
-				(((j>=3) && (j<=5)) && ((i>=14) && (i<=16))) ||
-				(((j>=14) && (j<=16)) && ((i>=3) && (i<=5))) ||
-				(((i>=9) && (i<=10)) && ((j>=4) && (j<=7))) ||
-				(((i>=9) && (i<=10)) && ((j>=12) && (j<=15)))
+				(((j >= 3) && (j <= 5)) && ((i >= 3) && (i <= 5))) ||
+				(((j >= 14) && (j <= 16)) && ((i >= 14) && (i <= 16))) ||
+				(((j >= 3) && (j <= 5)) && ((i >= 14) && (i <= 16))) ||
+				(((j >= 14) && (j <= 16)) && ((i >= 3) && (i <= 5))) ||
+				(((i >= 9) && (i <= 10)) && ((j >= 4) && (j <= 7))) ||
+				(((i >= 9) && (i <= 10)) && ((j >= 12) && (j <= 15)))
 
-				) {
+			) {
 				board[i][j] = 4;
 				board2[i][j] = 4;
 			}
 
-			 else {
+			else {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					food_remain--;
@@ -487,7 +516,7 @@ function Start() {
 		food_current++;
 		updateFrequency(food_current)
 	}
-	while(pacman_remain !=0){
+	while (pacman_remain != 0) {
 		let emptyCellPac = findRandomEmptyCell(board);
 		shape.i = emptyCellPac[0];
 		shape.j = emptyCellPac[1];
@@ -497,7 +526,7 @@ function Start() {
 
 	}
 
-	song =new Audio('The_Zephyr_Song.mp3')
+	song = new Audio('pacManSong.mp3')
 	song.play();
 	generateGhosts();
 	//ghostsUpdate();
@@ -518,9 +547,9 @@ function Start() {
 		false
 	);
 
-	$(document).ready(function(){
+	$(document).ready(function () {
 		interval = setInterval(UpdatePosition, 100);
-		interval4 = setInterval(ghostsUpdate,500);
+		interval4 = setInterval(ghostsUpdate, 500);
 		interval2 = setInterval(putCherry, 7000);
 		interval5 = setInterval(putHeart, 20000);
 		interval3 = setInterval(putGlow, 10000);
@@ -528,41 +557,38 @@ function Start() {
 
 }
 
-//start new game via game window
-function newGame(){
+function newGame() {
 
-	if(!isEmpty(glowObject)){
-		board2[glowObject.i][glowObject.j] ==0;
+	if (!isEmpty(glowObject)) {
+		board2[glowObject.i][glowObject.j] == 0;
 		glowObject = new Object();
 	}
 
 	gameEnded();
 
-	lives=5;
-	score=0;
+	lives = 5;
+	score = 0;
 
 	Start();
 }
 
-//update ghosts positions
-function ghostsUpdate(){
+function ghostsUpdate() {
 
 	ghosts.forEach(ghost => ghostsPositionReset(ghost));
-	ghosts.forEach(ghost=>moveGhost(ghost));
+	ghosts.forEach(ghost => moveGhost(ghost));
 }
 
-// put the running bonus of 50 points
-function putGlow(){
-	
-	let hasGlow= false;
-	for(var i =0;i<20;i++){
-		for(var j=0;j<20;j++){
-			if(board2[i][j]==50){
+function putGlow() {
+	//remove previous cherry
+	let hasGlow = false;
+	for (var i = 0; i < 20; i++) {
+		for (var j = 0; j < 20; j++) {
+			if (board2[i][j] == 50) {
 				hasGlow = true;
 			}
 		}
 	}
-	if(hasGlow==false){
+	if (hasGlow == false) {
 		var emptyCell = findRandomEmptyCell(board);
 		board2[1][1] = 50;
 		glowObject.i = 1;
@@ -571,9 +597,9 @@ function putGlow(){
 
 }
 
-function generateGhosts(){
+function generateGhosts() {
 	//board
-	if(monsterAmount>0){
+	if (monsterAmount > 0) {
 		board2[18][18] = 11;
 
 		var ghost1 = new Object();
@@ -582,58 +608,58 @@ function generateGhosts(){
 		ghost1.i = 18;
 		ghost1.j = 18;
 
-		ghosts = [ghost1]	
+		ghosts = [ghost1]
 	}
-	if(monsterAmount>1){
+	if (monsterAmount > 1) {
 		board2[1][1] = 12;
-		
+
 		var ghost2 = new Object();
 		ghost2.num = 12;
-		
-		ghost2.i=1;
-		ghost2.j=1;
 
-		ghosts = [ghost1,ghost2]
+		ghost2.i = 1;
+		ghost2.j = 1;
+
+		ghosts = [ghost1, ghost2]
 	}
-	if(monsterAmount>2){
+	if (monsterAmount > 2) {
 		board2[1][18] = 13;
-		
+
 		var ghost3 = new Object();
 		ghost3.num = 13;
-		
-		ghost3.i =1;
-		ghost3.j =18;
 
-		ghosts = [ghost1,ghost2,ghost3]
-		
+		ghost3.i = 1;
+		ghost3.j = 18;
+
+		ghosts = [ghost1, ghost2, ghost3]
+
 	}
-	if(monsterAmount>3){
+	if (monsterAmount > 3) {
 		board2[18][1] = 14;
-		
+
 		var ghost4 = new Object();
 		ghost4.num = 14;
-		
-		ghost4.i =18;
-		ghost4.j =1;
 
-		ghosts = [ghost1,ghost2,ghost3,ghost4]
+		ghost4.i = 18;
+		ghost4.j = 1;
+
+		ghosts = [ghost1, ghost2, ghost3, ghost4]
 	}
 
 
 }
 
-function putCherry(){
+function putCherry() {
 	//remove previous cherry
-	let hasCherry= false;
-	for(var i =0;i<20;i++){
-		for(var j=0;j<20;j++){
-			if(board[i][j]==100){
-				board[i][j] =0;
+	let hasCherry = false;
+	for (var i = 0; i < 20; i++) {
+		for (var j = 0; j < 20; j++) {
+			if (board[i][j] == 100) {
+				board[i][j] = 0;
 				hasCherry = true;
 			}
 		}
 	}
-	if(hasCherry==false){
+	if (hasCherry == false) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 100;
 	}
@@ -659,18 +685,18 @@ function putHeart(){
 }
 
 
-function foodDistribution(foodArray){
+function foodDistribution(foodArray) {
 	//let foodPercent = [5:foodArray[fiveFoodColor].currentPercent, 15:foodArray[fifteenFoodColor].currentPercent,25:foodArray[twentyFiveFoodColor].currentPercent];
-	foodArray.sort(function(a,b){return a.currentPercent-b.currentPercent});
+	foodArray.sort(function (a, b) { return a.currentPercent - b.currentPercent });
 	foodArray[0].amount++;
 	return foodArray[0].value;
 
 }
 
-function updateFrequency(){
-	fiveFood.currentPercent = (fiveFood.amount/food_current)-fiveFood.frequency;
-	fifteenFood.currentPercent = (fifteenFood.amount/food_current)-fifteenFood.frequency;
-	twentyFiveFood.currentPercent = (twentyFiveFood.amount/food_current)-twentyFiveFood.frequency;
+function updateFrequency() {
+	fiveFood.currentPercent = (fiveFood.amount / food_current) - fiveFood.frequency;
+	fifteenFood.currentPercent = (fifteenFood.amount / food_current) - fifteenFood.frequency;
+	twentyFiveFood.currentPercent = (twentyFiveFood.amount / food_current) - twentyFiveFood.frequency;
 
 }
 
@@ -690,15 +716,15 @@ function GetKeyPressed() {
 		return 1;
 	}
 	if (keysDown[downKey]) {
-		myImage.src ='pacManDown.png';
+		myImage.src = 'pacManDown.png';
 		return 2;
 	}
 	if (keysDown[leftKey]) {
-		myImage.src ='pacManLeft.png';
+		myImage.src = 'pacManLeft.png';
 		return 3;
 	}
 	if (keysDown[rightKey]) {
-		myImage.src ='pacManRight.png';
+		myImage.src = 'pacManRight.png';
 		return 4;
 	}
 }
@@ -716,7 +742,7 @@ function Draw() {
 			center.x = i * 30 + 15;
 			center.y = j * 30 + 15;
 			if (board[i][j] == 2) {
-				context.drawImage(myImage,center.x-15,center.y-15,35,35);
+				context.drawImage(myImage, center.x - 15, center.y - 15, 35, 35);
 			} if (board[i][j] == 5) {
 				context.beginPath();
 				context.arc(center.x, center.y, 10, 0, 2 * Math.PI); // circle
@@ -737,87 +763,88 @@ function Draw() {
 			}if (board[i][j] == 35) {
 				context.drawImage(heart,center.x-15,center.y-15,30,30);
 			} if (board2[i][j] == 50) {
-				context2.drawImage(glow,center.x-15,center.y-15,30,30);
+				context2.drawImage(glow, center.x - 15, center.y - 15, 30, 30);
 			} if (board[i][j] == 4) {
 				context.beginPath();
-				context.rect(center.x - 15, center.y -15, 30, 30);
-				context.fillStyle = "grey"; //color
+				context.rect(center.x - 15, center.y - 15, 30, 30);
+				context.fillStyle = "rgba(0, 0, 255, 0.4)";
+				//color
 				context.fill();
 			}
-			if(board2[i][j] == 11){
-				context2.drawImage(ghost1Img,center.x-15,center.y-15,35,35);
+			if (board2[i][j] == 11) {
+				context2.drawImage(ghost1Img, center.x - 15, center.y - 15, 35, 35);
 			}
-			if(board2[i][j] == 12){
-				context2.drawImage(ghost2Img,center.x-15,center.y-15,35,35);
+			if (board2[i][j] == 12) {
+				context2.drawImage(ghost2Img, center.x - 15, center.y - 15, 35, 35);
 			}
-			if(board2[i][j] == 13){
-				context2.drawImage(ghost3Img,center.x-15,center.y-15,35,35);
+			if (board2[i][j] == 13) {
+				context2.drawImage(ghost3Img, center.x - 15, center.y - 15, 35, 35);
 			}
-			if(board2[i][j] == 14){
-				context2.drawImage(ghost4Img,center.x-15,center.y-15,35,35);
+			if (board2[i][j] == 14) {
+				context2.drawImage(ghost4Img, center.x - 15, center.y - 15, 35, 35);
 			}
 		}
 	}
 }
 
-// interval that updates the positions of the object on the board
 
+// interval that updates the positions of the object on the board
 function UpdatePosition() {
-	if(!isEmpty(shape)){
+	if (!isEmpty(shape)) {
 
 		board[shape.i][shape.j] = 0;
-		
+
 		var x = GetKeyPressed();
-		moveObject(x,shape);
-		
-	
+		moveObject(x, shape);
+
+
 		if (board[shape.i][shape.j] == 5) {
-			score= score+5;
+			score = score + 5;
 			food_current--;
 		}
 		if (board[shape.i][shape.j] == 15) {
-			score=score+15;
+			score = score + 15;
 			food_current--;
 		}
 		if (board[shape.i][shape.j] == 25) {
-			score=score +25;
+			score = score + 25;
 			food_current--;
 		}
 		if (board[shape.i][shape.j] == 35) {
 			lives++;
 		}
 		if (board[shape.i][shape.j] == 100) {
-			score=score +100;
+			score = score + 100;
 		}
-	
+
 		board[shape.i][shape.j] = 2; // update pacman position
 	}
 
-	if(!isEmpty(glowObject)){
+	if (!isEmpty(glowObject)) {
 		let iGlow = glowObject.i;
 		let jGlow = glowObject.j;
 
-		let glowMove = getRandomInt(1,4);
-		while(!validMove(glowMove,glowObject)){
-			glowMove = getRandomInt(1,4);
+		let glowMove = getRandomInt(1, 4);
+		while (!validMove(glowMove, glowObject)) {
+			glowMove = getRandomInt(1, 4);
 			//ghostsUpdate();
 		}
 		board2[iGlow][jGlow] = 0;
-		moveObject(glowMove,glowObject);
+		moveObject(glowMove, glowObject);
 
-		
-		if(shape.i == glowObject.i && shape.j == glowObject.j){
+
+		if (shape.i == glowObject.i && shape.j == glowObject.j) {
 			board2[glowObject.i][glowObject.j] = 2;
-			score = score +50;
+			score = score + 50;
 			glowObject = new Object();
 		}
-		else{
+		else {
 			board2[glowObject.i][glowObject.j] = 50; // update pacman position
 		}
 
 	}
 
-	ghosts.forEach(ghost=>checkFail(ghost));
+	ghosts.forEach(ghost => checkFail(ghost));
 
 	var currentTime = new Date();
 	let time = parseInt((((timeLimit*1000)-(currentTime - start_time)) / 1000),10);
@@ -825,25 +852,25 @@ function UpdatePosition() {
 	if (score >= 20 && time_elapsed <= 10) {
 		pac_color = "green";
 	}
-	if (food_current == 0 || time_elapsed<=0 ||lives==0) {
+	if (food_current == 0 || time_elapsed <= 0 || lives == 0) {
 		Draw();
 		gameEnded();
-		if(lives==0){
+		if (lives == 0) {
 			window.alert("Loser!");
 
 		}
-		else if(time_elapsed<=0){
-			if(score<=100){
-				window.alert("You are better than "+score+" points!")
+		else if (time_elapsed <= 0) {
+			if (score <= 100) {
+				window.alert("You are better than " + score + " points!")
 
 			}
-			else{
+			else {
 				window.alert("Game over");
 			}
 		}
-		else{
+		else {
 			window.alert("Winner!!!");
-			
+
 		}
 
 	} else {
@@ -851,10 +878,10 @@ function UpdatePosition() {
 	}
 }
 
-function gameEnded(){
+function gameEnded() {
 
-	if(!isEmpty(glowObject)){
-		board2[glowObject.i][glowObject.j] ==0;
+	if (!isEmpty(glowObject)) {
+		board2[glowObject.i][glowObject.j] == 0;
 		glowObject = new Object();
 	}
 
@@ -870,21 +897,23 @@ function gameEnded(){
 	interval5 = null;
 
 	song.pause();
-	song.currentTime =0;
+	song.currentTime = 0;
 
 	song = new Audio();
 }
 
 //check if monsters ate pacman and do operations accordingly
-function checkFail(ghost){
-	if(ghost.i == shape.i && ghost.j == shape.j){
+function checkFail(ghost) {
+	if (ghost.i == shape.i && ghost.j == shape.j) {
 		lives--;
-		score = score-10;
-		if(lives>0){
-			
-			ghosts.forEach(ghost=> ghostsPositionReset(ghost))
+		var death = new Audio("pacManDie.mp3");
+		death.play();
+		score = score - 10;
+		if (lives > 0) {
+
+			ghosts.forEach(ghost => ghostsPositionReset(ghost))
 			generateGhosts();
-	
+
 			emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = 2;
 			board[shape.i][shape.j] = 0;
@@ -895,14 +924,14 @@ function checkFail(ghost){
 
 }
 
-function ghostsPositionReset(ghost){
-	board2[ghost.i][ghost.j] = 0;	
+function ghostsPositionReset(ghost) {
+	board2[ghost.i][ghost.j] = 0;
 }
 
-function moveGhost(ghost){
+function moveGhost(ghost) {
 	let x;
-	if((shape.i - ghost.i <0) && (shape.j-ghost.j<0)){
-		x = tossCoin(1,3);
+	if ((shape.i - ghost.i < 0) && (shape.j - ghost.j < 0)) {
+		x = tossCoin(1, 3);
 	}
 	else if((shape.i - ghost.i <0) && (shape.j-ghost.j>=0)){
 		x = tossCoin(2,3);
@@ -920,44 +949,44 @@ function moveGhost(ghost){
 	board2[ghost.i][ghost.j]=ghost.num;
 }
 
-function tossCoin(value1, value2){
+function tossCoin(value1, value2) {
 	var chosenValue = Math.random() < 0.5 ? value1 : value2;
 	return chosenValue;
 }
 
-function validMove(x,obj){
+function validMove(x, obj) {
 	if (x == 1) {
-		if (obj.j > 0 && board[obj.i][obj.j - 1] != 4 && !isCellGhost(obj.i,obj.j - 1)) {
+		if (obj.j > 0 && board[obj.i][obj.j - 1] != 4 && !isCellGhost(obj.i, obj.j - 1)) {
 			return true;
 		}
 	}
 	if (x == 2) {
-		if (obj.j < 19 && board[obj.i][obj.j + 1] != 4 && !isCellGhost(obj.i,obj.j + 1)) {
+		if (obj.j < 19 && board[obj.i][obj.j + 1] != 4 && !isCellGhost(obj.i, obj.j + 1)) {
 			return true;
 		}
 	}
 	if (x == 3) {
-		if (obj.i > 0 && board[obj.i - 1][obj.j] != 4 && !isCellGhost(obj.i - 1,obj.j)) {
+		if (obj.i > 0 && board[obj.i - 1][obj.j] != 4 && !isCellGhost(obj.i - 1, obj.j)) {
 			return true;
 		}
 	}
 	if (x == 4) {
-		if (obj.i < 19 && board[obj.i + 1][obj.j] != 4 && !isCellGhost(obj.i + 1,obj.j)) {
+		if (obj.i < 19 && board[obj.i + 1][obj.j] != 4 && !isCellGhost(obj.i + 1, obj.j)) {
 			return true;
 		}
 	}
 	return false;
 }
 
-function isCellGhost(i,j){
-	if(board2[i][j] == 11 || board2[i][j] == 12 ||
-		board2[i][j] == 13 || board2[i][j] == 14){
-			return true;
-		}
-		return false;
+function isCellGhost(i, j) {
+	if (board2[i][j] == 11 || board2[i][j] == 12 ||
+		board2[i][j] == 13 || board2[i][j] == 14) {
+		return true;
+	}
+	return false;
 }
 
-function moveObject(x,obj){
+function moveObject(x, obj) {
 	if (x == 1) {
 		if (obj.j > 0 && board[obj.i][obj.j - 1] != 4) {
 			obj.j--;
@@ -981,9 +1010,9 @@ function moveObject(x,obj){
 }
 
 function isEmpty(obj) {
-    for(var key in obj) {
-        if(obj.hasOwnProperty(key))
-            return false;
-    }
-    return true;
+	for (var key in obj) {
+		if (obj.hasOwnProperty(key))
+			return false;
+	}
+	return true;
 }
