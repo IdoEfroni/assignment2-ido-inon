@@ -14,9 +14,10 @@ var score;
 var pac_color;
 var start_time;
 var time_elapsed;
-var interval;
+var interval=null;
 var interval2;
 var interval3;
+var interval4;
 var song;
 //ido added
 var List = new Array();
@@ -66,7 +67,18 @@ $(document).ready(function () {
 	var c1 = document.getElementById('canvas')
 	context = c1.getContext("2d");
 	var c2 = document.getElementById('canvas2');
-  	context2 = c2.getContext("2d");
+	  context2 = c2.getContext("2d");
+	  
+	$("#preferencesForm").submit(function (e) {
+		e.preventDefault();
+		preferences();
+	});
+
+	$("#commentForm").submit(function (e) {
+		e.preventDefault();
+		validation();
+	})
+
 	//Start the PakMan game
 	Initialize();
 });
@@ -86,6 +98,8 @@ $(document).keydown(function(e) {
 		 $('.modal-backdrop').hide();
 	}
   });
+  
+
 
  /**
   * this function initialize the divs screen and display the welcome screen 
@@ -137,11 +151,6 @@ function Register() {
 	document.getElementById("time").style.display = 'none';
 	document.getElementById("game").style.display = 'none';
 	document.getElementById("newGame").style.display = 'none';
-
-	$("#commentForm").submit(function (e) {
-		e.preventDefault();
-		validation();
-	})
 
 }
 /**
@@ -253,6 +262,8 @@ function tryToLog() {
 			return false;
 	}
 }
+
+
 /**
  * this function show the preferences div
  */
@@ -274,10 +285,6 @@ function showPreferences() {
 	} if (Register.style.display == 'block') {
 		Register.style.display = 'none'
 	}
-	$("#preferencesForm").submit(function (e) {
-		e.preventDefault();
-		preferences();
-	})
 	
 	document.getElementById("score").style.display = 'none';
 	document.getElementById("time").style.display = 'none';
@@ -394,6 +401,9 @@ function StartGame() {
 	document.getElementById("time").style.display = 'block';
 	document.getElementById("game").style.display = 'block';
 	document.getElementById("newGame").style.display = 'block';
+	if(interval !=null){
+		gameEnded();
+	}
 	Start();
 }
 
@@ -401,6 +411,7 @@ function StartGame() {
  * this is the original function 
  */
 function Start() {
+
 	board = new Array();
 	board2 = new Array();
 	score = 0;
@@ -416,8 +427,7 @@ function Start() {
 	fifteenFood.currentPercent = 0-fifteenFood.frequency;
 	twentyFiveFood = {value:25,frequency:0.1, amount:0};
 	twentyFiveFood.currentPercent = 0-twentyFiveFood.frequency;
-
-
+	lives =5;
 
 	let foodArray = [fiveFood,fifteenFood,twentyFiveFood];
 	for (var i = 0; i < 20; i++) {
@@ -426,11 +436,11 @@ function Start() {
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < 20; j++) {
 			if (
-				((i==0 || j==0 || i==19 || j==19) && (j!=9) && (j!=10)) ||
-				((j==8) && (i==0 ||i==1 ||i==2 || i==3)) ||
-				((j==8) && (i==19 ||i==18 ||i==17 || i==16)) ||
-				((j==11) && (i==0 ||i==1 ||i==2 || i==3) ) ||
-				((j==11) && (i==19 ||i==18 ||i==17 ||i==16) ) ||
+				((i==0 || j==0 || i==19 || j==19)) ||
+				//((j==8) && (i==0 ||i==1 ||i==2 || i==3)) ||
+				//((j==8) && (i==19 ||i==18 ||i==17 || i==16)) ||
+				//((j==11) && (i==0 ||i==1 ||i==2 || i==3) ) ||
+				//((j==11) && (i==19 ||i==18 ||i==17 ||i==16) ) ||
 				(((j>=3) && (j<=5)) && ((i>=3) && (i<=5))) ||
 				(((j>=14) && (j<=16)) && ((i>=14) && (i<=16))) ||
 				(((j>=3) && (j<=5)) && ((i>=14) && (i<=16))) ||
@@ -473,6 +483,15 @@ function Start() {
 		food_current++;
 		updateFrequency(food_current)
 	}
+	while(pacman_remain !=0){
+		let emptyCellPac = findRandomEmptyCell(board);
+		shape.i = emptyCellPac[0];
+		shape.j = emptyCellPac[1];
+		pacman_remain--;
+		board[emptyCellPac[0]][emptyCellPac[1]] = 2;
+		board2[emptyCellPac[0]][emptyCellPac[1]] = 2;
+
+	}
 
 	song =new Audio('The_Zephyr_Song.mp3')
 	song.play();
@@ -511,16 +530,10 @@ function newGame(){
 		glowObject = new Object();
 	}
 
+	gameEnded();
+
 	lives=5;
 	score=0;
-
-	song.pause();
-	song.currentTime =0;
-
-	window.clearInterval(interval);
-	window.clearInterval(interval2);
-	window.clearInterval(interval3);
-	window.clearInterval(interval4);
 
 	Start();
 }
@@ -663,6 +676,7 @@ function GetKeyPressed() {
 	}
 }
 
+//drawing the objects that placed on the board 
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	canvas2.width = canvas2.width;
@@ -716,6 +730,8 @@ function Draw() {
 		}
 	}
 }
+
+// interval that updates the positions of the object on the board
 
 function UpdatePosition() {
 	if(!isEmpty(shape)){
@@ -778,12 +794,7 @@ function UpdatePosition() {
 	}
 	if (food_current == 0 || time_elapsed<=0 ||lives==0) {
 		Draw();
-		window.clearInterval(interval);
-		window.clearInterval(interval2);
-		window.clearInterval(interval3);
-		window.clearInterval(interval4);
-		song.pause();
-		song.currentTime =0;
+		gameEnded();
 		if(lives==0){
 			window.alert("Loser!");
 
@@ -805,6 +816,29 @@ function UpdatePosition() {
 	} else {
 		Draw();
 	}
+}
+
+function gameEnded(){
+
+	if(!isEmpty(glowObject)){
+		board2[glowObject.i][glowObject.j] ==0;
+		glowObject = new Object();
+	}
+
+	clearInterval(interval);
+	interval = null;
+	clearInterval(interval2);
+	interval2 = null;
+	clearInterval(interval3);
+	interval3 = null;
+	clearInterval(interval4);
+	interval4 = null;
+
+
+	song.pause();
+	song.currentTime =0;
+
+	song = new Audio();
 }
 
 //check if monsters ate pacman and do operations accordingly
