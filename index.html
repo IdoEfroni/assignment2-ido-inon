@@ -15,13 +15,13 @@
 </head>
 
 
-<body style="background-color:rgb(0, 0, 0);">
+<body style="background-color:rgb(197, 64, 64);">
 
 	<!-- ido code  -->
 
 	<article>
 		<header>
-			<img src="pacManLogo.png" height="120" width="500" class="center">
+			<img src="pacManLogo.png" height="120" width="500" class="centerLogo">
 			<p style="text-align:center">Ovadia Ido Efroni, id:204677777
 				Inon Ben Zikri , id:204439806
 			</p>
@@ -32,12 +32,12 @@
 		<a href="#" onclick="Welcome()">Home</a>
 		<a href="#" onclick="Register()">Register</a>
 		<a href="#" onclick="Login()">Login</a>
-		<a href="#"data-toggle="modal" data-target="#myModal">about</a>
+		<a href="#" data-toggle="modal" data-target="#myModal">about</a>
 		<div class="animation start-home"></div>
 	</nav>
-	
 
-	<div id = "block_container">
+
+	<div id="block_container">
 		<div id="score" style="display: none;">
 			<label for="lblScore">SCORE:</label>
 			<input id="lblScore" type="text" />
@@ -62,7 +62,7 @@
 		</div>
 		
 	</div>
-	
+
 
 	<!-- ido code  -->
 
@@ -75,86 +75,142 @@
 		<button type="button" class="myButton" onclick="Login()">Login</button>
 	</div>
 
-	
-	<div id=Register style="display: none;">
-		<form class="cmxform" id="commentForm" method="get" action="">
-			<fieldset>
-				<legend>Please provide your name, email address (won't be published) and a comment</legend>
-				<p>
-					<label for="UserName">User-Name (required, at least 2 characters):</label><br>
-					<input id="UserName" name="UserName" minlength="2" type="text" required>
-				</p>
-				<p>
-					<label for="cemail">E-Mail (required):</label><br>
-					<input id="cemail" type="email" name="email" required>
-				</p>
-				<p>
-					<label for="Password">Password:</label><br>
-					<input type="password" id="Password" name="Password" minlength="6" required>
-				</p>
-				<p>
-					<label for="firstName">First-Name:</label><br>
-					<input type="text" id="firstName" name="firstName" required><br>
-				</p>
-				<p>
-					<label for="SecondName">Second-Name:</label><br>
-					<input type="text" id="SecondName" name="SecondName" required><br>
-				</p>
-				<p>
-					<label for="BirthDate">date of birth:</label><br>
-					<input type="date" id="BirthDate" name="BirthDate" min="1990-01-01" max="2020-04-31"
-						required><br><br>
-				</p>
-				<p>
-					<input class="submit" type="submit" value="Register">
 
-			</fieldset>
+	<div id=Register class="registration-Form" style="display: none;">
+		<h1>Registration-Form</h1>
+		<form class="cmxform" id="commentForm" method="get" action="" autocomplete="off">
+			<!--<legend>Please provide your name, email address (won't be published) and a comment</legend>-->
+			<table>
+				<tr>
+					<td>
+						<label for="UserName">User-Name (required, at least 2 characters):</label>
+						<input id="UserName" name="UserName" minlength="2" type="text" required>
+					</td>
+					<td>
+						<label for="cemail">E-Mail (required):</label>
+						<input id="cemail" type="email" name="email" required>
+					</td>
+					<td>
+						<label for="Password">Password:</label>
+						<input type="password" id="Password" name="Password" minlength="6" required>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="firstName">First-Name:</label>
+						<input type="text" id="firstName" name="firstName" required>
+					</td>
+					<td>
+						<label for="SecondName">Last-Name:</label>
+						<input type="text" id="SecondName" name="SecondName" required>
+					</td>
+					<td>
+						<label for="BirthDate">date of birth:</label>
+						<input type="date" id="BirthDate" name="BirthDate" min="1900-01-01" max="2020-04-31" required>
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input class="submit" type="submit" value="Register">
+					</td>
+				</tr>
+			</table>
 		</form>
 	</div>
 
-	<div id="Login" style="display: none;">
-		<p>please enter existing UserName and Password</p>
-		<form id="LoginForm">
+	<div id="Login" class="form-box" style="display: none;">
+		<h1>Login</h1>
+		<form id="LoginForm" autocomplete="off">
 			<label for="UserNameLog">UserName:</label><br>
-			<input type="text" id="UserNameLog" name="UserNameLog" value=""><br>
+			<input type="text" id="UserNameLog" name="UserNameLog" placeholder="Enter Username"><br>
 			<label for="PasswordLog">Password:</label><br>
-			<input type="text" id="PasswordLog" name="PasswordLog" value="">
+			<input type="text" id="PasswordLog" name="PasswordLog" placeholder="Enter Password">
 			<br><br>
-			<button type="button" onclick="tryToLog()">Login</button>
+			<input type="submit" value="Login" onclick="tryToLog()">
+			<!--<button type="button" onclick="tryToLog()">Login</button>-->
 		</form>
 	</div>
 
-	<div id="Preferences" style="display: none;">
-		<form id="preferencesForm">
-			<label for="UpKey">Enter Up Key:</label><br>
-			<input type="text" id="UpKey" name="UpKey" value="up arrow" onkeypress="functionUpKey(event)"><br>
-			<label for="DownKey">Enter Down Key:</label><br>
-			<input type="text" id="DownKey" name="DownKey" value="down arrow" onkeypress="functionDownKey(event)"><br>
-			<label for="RighthKey">Enter Right Key:</label><br>
-			<input type="text" id="RighthKey" name="RighthKey" value="right arrow"
-				onkeypress="functionRightKey(event)"><br>
-			<label for="LeftKey">Enter Left Key:</label><br>
-			<input type="text" id="LeftKey" name="LeftKey" value="left arrow" onkeypress="functionLeftKey(event)"><br>
-			<label for="PelletsNum">Enter a number of Pellets(between 50 and 90):</label><br>
-			<input type="number" id="PelletsNum" name="PelletsNum" min="50" max="90" value=50><br>
-			<label for="fivePellet">Select your color for the 5 point Pellets:</label>
-			<input type="color" id="fivePellet" name="fivePellet" value="#ffff00"><br>
-			<label for="fifteenPellet">Select your color for the 15 point Pellets:</label>
-			<input type="color" id="fifteenPellet" name="fifteenPellet" value="#ff8040"><br>
-			<label for="twentyfivePellet">Select your color for the 25 point Pellets::</label>
-			<input type="color" id="twentyfivePellet" name="twentyfivePellet" value="#ff0000"><br>
-			<label for="timeLimit">Enter a time limit in seconds(minimum value 60 seconds):</label><br>
-			<input type="number" id="timeLimit" name="timeLimit" min="60" value="60"><br>
-			<label for="monsterAmount">Enter a number of monster(ghosts) in the game(between 1 and 4):</label><br>
-			<input type="number" id="monsterAmount" name="monsterAmount" min="1" max="4" value="1"><br>
-			<label for="RandomButton">Press to filled Random Values to the game:</label><br><br>
-			<button type="button" onclick="RandomValues()">Random!</button>
-			<br><br>
-			<button type="button" onclick="preferences()">submit</button>
+	<div id="Preferences" class="Preferences-Form" style="display: none;">
+		<h1>Preferences</h1>
+		<form id="preferencesForm"  method="get" action="" autocomplete="off">
+			<table>
+				<tr>
+					<td>
+						<label for="UpKey">Enter Up Key:</label>
+						<input type="text" id="UpKey" name="UpKey" value="" placeholder="up arrow"  onkeypress="functionUpKey(event)">
+					</td>
+					<td>
+						<label for="DownKey">Enter Down Key:</label>
+						<input type="text" id="DownKey" name="DownKey" value="" placeholder="down arrow"
+							onkeypress="functionDownKey(event)">
+					</td>
+					<td>
+						<label for="RighthKey">Enter Right Key:</label>
+						<input type="text" id="RighthKey" name="RighthKey" value="" placeholder="right arrow"
+							onkeypress="functionRightKey(event)">
+					</td>
+					<td>
+						<label for="LeftKey">Enter Left Key:</label>
+						<input type="text" id="LeftKey" name="LeftKey" value="" placeholder="left arrow"
+							onkeypress="functionLeftKey(event)">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="PelletsNum">Enter a number of Pellets(between 50 and 90):</label>
+							<output name="PelletsNumOutPutName" id="PelletsNumOutPutId" style="color:rgb(31, 231, 47)">50</output>
+						<div class="slidecontainer">
+							<input type="range" min="50" max="90" value="50" class="slider"
+							 name="PelletsNumInputName" id="PelletsNumId" 
+							 oninput="PelletsNumOutPutId.value = PelletsNumId.value">
+						  </div>
+					</td>
+					<td>
+						<label for="fivePellet">Select color for the 5 point Pellets:</label><br>
+						<input type="color" id="fivePellet" name="fivePellet" value="#ffff00">
+					</td>
+					<td>
+						<label for="fifteenPellet">Select color for the 15 point Pellets:</label><br>
+						<input type="color" id="fifteenPellet" name="fifteenPellet" value="#ff8040">
+					</td>
+					<td>
+						<label for="twentyfivePellet">Select color for the 25 point Pellets:</label><br>
+						<input type="color" id="twentyfivePellet" name="twentyfivePellet" value="#ff0000">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						
+						<label for="timeLimit">Enter a time limit in seconds(minimum value 60 seconds):</label>
+						<input type="number" id="timeLimit" name="timeLimit" min="60" value="60" required>
+					</td>
+					<td>
+						<label for="monsterAmount">Enter a number of monster(ghosts) in the game(between 1 and
+							4):</label>
+							<output name="monsterOutPutName" id="monsterOutPutId" style="color:rgb(31, 231, 47)">1</output>
+						<div class="slidecontainer">
+							<input type="range" min="1" max="4" value="1" class="slider"
+							 name="monsterInputName" id="monsterAmountId" oninput="monsterOutPutId.value = monsterAmountId.value">
+						  </div>
+					</td>
+					<td>
+						<label for="RandomButton">Press to filled Random Values to the game:</label>
+						<button type="button" class="bRandom" onclick="RandomValues()">Random!</button>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					</td>
+					<td>
+						<!--<button type="button" onclick="preferences()">submit</button>-->
+						<input type="submit" value="submit">
+					</td>
+				</tr>
+			</table>
 		</form>
 	</div>
-
-
 
 
 	<div class="about">
@@ -183,9 +239,6 @@
 
 
 
-
-
-
 	<footer>
 		<p>Posted by: Ovadia Ido Efroni & Inon Ben Zikri</p>
 		<p>Contact information: <a href="mailto:efronio@post.bgu.ac.il">
@@ -198,9 +251,5 @@
 
 </body>
 <!-- existing code  -->
-
-
-
-
 
 </html>
