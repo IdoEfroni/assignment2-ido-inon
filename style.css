@@ -206,6 +206,9 @@ h1{
     color: #39dc79;
 }
 
+div#Login,#Preferences,#gameDetails,#Register {
+    border-radius: 5%;
+}
 /********************/
 
 /********registration-Form style************/
