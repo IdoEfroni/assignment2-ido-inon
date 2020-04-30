@@ -251,6 +251,12 @@ function Login() {
 	}
 	document.getElementById("gameDetails").style.display = 'none';
 
+	document.getElementById("score").style.display = 'none';
+	document.getElementById("lives").style.display = 'none';
+	document.getElementById("time").style.display = 'none';
+	document.getElementById("game").style.display = 'none';
+	document.getElementById("newGame").style.display = 'none';
+
 	$("#LoginForm").submit(function (e) {
 		e.preventDefault();
 	})
@@ -391,6 +397,7 @@ function getRandomColor() {
 function setRandomColor() {
 	$("#colorpad").css("background-color", getRandomColor());
 }
+
 */
 /**
  * this function set the up key press 
