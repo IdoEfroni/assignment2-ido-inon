@@ -374,12 +374,11 @@ function getRandomColor() {
 	}
 	return color;
 }
-/**
- * this function set the random color
- */
+/** 
 function setRandomColor() {
 	$("#colorpad").css("background-color", getRandomColor());
 }
+*/
 /**
  * this function set the up key press 
  * @param {*} event 
