@@ -128,6 +128,9 @@ function Initialize() {
  * this function displat the welcome screen 
  */
 function Welcome() {
+	if (interval != null) {
+		gameEnded();
+	}
 	var x = document.getElementById("Welcome");
 	if (x.style.display === "none") {
 		x.style.display = "block";
@@ -149,6 +152,9 @@ function Welcome() {
  * this function open the registration form div 
  */
 function Register() {
+	if (interval != null) {
+		gameEnded();
+	}
 	var x = document.getElementById("Register");
 	//if (x.style.display === "none") {
 	x.style.display = "block";
@@ -228,6 +234,9 @@ function isAlpha(str) {
  * this function display the login div
  */
 function Login() {
+	if (interval != null) {
+		gameEnded();
+	}
 	if (document.getElementById("Login").style.display === "none") {
 		document.getElementById("Login").style.display = 'block';
 	}
