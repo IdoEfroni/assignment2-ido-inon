@@ -397,6 +397,7 @@ function getRandomColor() {
 function setRandomColor() {
 	$("#colorpad").css("background-color", getRandomColor());
 }
+
 */
 /**
  * this function set the up key press 
