@@ -14,7 +14,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
-
 <body style="overflow-x: hidden">
 
 	<!-- ido code  -->
@@ -66,9 +65,9 @@
 				<canvas id="canvas" class="canvas-layer" height="600" width="600"></canvas>
 				<canvas id="canvas2" class="canvas-layer" height="600" width="600"></canvas>
 			</div>
-		</div>
-		<div id="newGame" style="display: none;">
-			<button type="button" class="gameButton" onclick="newGame()">New Game</button>
+			<div id="newGame" style="display: none;">
+				<button type="button" class="gameButton" onclick="newGame()">New Game</button>
+			</div>
 		</div>
 	</div>
 
@@ -84,7 +83,7 @@
 		<button type="button" class="myButton" onclick="Login()">Login</button>
 	</div>
 
-
+	<!---->
 	<div id=Register class="registration-Form" style="display: none;">
 		<h1>Registration-Form</h1>
 		<form class="cmxform" id="commentForm" method="get" action="" autocomplete="off">
@@ -149,7 +148,7 @@
 					<td>
 						<label for="UpKey">Enter Up Key:</label>
 						<input type="text" id="UpKey" name="UpKey" value="" placeholder="up arrow"
-						onkeydown="functionUpKey()">
+							onkeydown="functionUpKey()">
 					</td>
 					<td>
 						<label for="DownKey">Enter Down Key:</label>
@@ -159,12 +158,12 @@
 					<td>
 						<label for="RighthKey">Enter Right Key:</label>
 						<input type="text" id="RighthKey" name="RighthKey" value="" placeholder="right arrow"
-						onkeydown="functionRightKey()">
+							onkeydown="functionRightKey()">
 					</td>
 					<td>
 						<label for="LeftKey">Enter Left Key:</label>
 						<input type="text" id="LeftKey" name="LeftKey" value="" placeholder="left arrow"
-						onkeydown="functionLeftKey()">
+							onkeydown="functionLeftKey()">
 					</td>
 				</tr>
 				<tr>
@@ -243,8 +242,9 @@
 			</tr>
 			<tr>
 				<td>
-				<label for="displayRighthKey">Right Key:</label>
-				<output id="displayRighthKey" name="displayRighthKey" style="color:rgb(31, 231, 47)">Right arrow</output>
+					<label for="displayRighthKey">Right Key:</label>
+					<output id="displayRighthKey" name="displayRighthKey" style="color:rgb(31, 231, 47)">Right
+						arrow</output>
 				</td>
 				<td>
 					<label for="displayLeftKey">Left Key:</label>
@@ -254,8 +254,7 @@
 			<tr>
 				<td>
 					<label for="displayPelletsNum">number of Pellets:</label>
-					<output name="displayPelletsNum" id="displayPelletsNum"
-						style="color:rgb(31, 231, 47)">50</output>
+					<output name="displayPelletsNum" id="displayPelletsNum" style="color:rgb(31, 231, 47)">50</output>
 				</td>
 				<td>
 					<label for="displayFivePellet">5 point Pellets color:</label>
@@ -291,17 +290,31 @@
 
 	<div class="about">
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal fade" id="myModal" role="dialog" >
 			<div class="modal-dialog">
 
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Modal Header</h4>
 					</div>
 					<div class="modal-body">
-						<p>Some text in the modal.</p>
+						<p class="pTag">
+							<p><b>Welcome to Ido Efroni and Inon Ben Zekri game!</b></p><br><br>
+							<p>
+								<u>IDs:</u> 204439806,204677777 <br><br>
+								<u>jQuery uses:</u> we took insparation from Jquery Validation plugin in the
+								registration form
+								and the login form.
+								<br> in addition, we used jquery in many cases such as: extracting values from input
+								fields and checking their validity,
+								<br> loading critical actions only when the page is fully loaded using ready function,
+								listeners for key and clicks events,
+								<br> showing and hiding divs and diaglogs, and on submit actions.
+								<br><br> <u>difficulties:</u> debuging and error detection (only happens on runtime),
+								syncronizing the html-js files, unfamilier functionalities that needed self-research in
+								new languge such as javascript.
+							</p>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -312,8 +325,6 @@
 		</div>
 
 	</div>
-
-
 
 	<footer>
 		<p>Posted by: Ovadia Ido Efroni & Inon Ben Zikri</p>
