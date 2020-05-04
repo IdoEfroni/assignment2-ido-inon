@@ -541,7 +541,7 @@ function Start() {
 
 	}
 
-	song = new Audio('pacManSong.mp3')
+	song = new Audio('The_Zephyr_Song.mp3');
 	song.play();
 	generateGhosts();
 	//ghostsUpdate();
@@ -880,7 +880,7 @@ function UpdatePosition() {
 
 			}
 			else {
-				window.alert("Game over");
+				window.alert("Winner!!!");
 			}
 		}
 		else {
