@@ -921,7 +921,7 @@ function gameEnded() {
 function checkFail(ghost) {
 	if (ghost.i == shape.i && ghost.j == shape.j) {
 		lives--;
-		var death = new Audio("pacManDie.mp3");
+		let death = new Audio("pacManDie.mp3");
 		death.play();
 		score = score - 10;
 		if (lives > 0) {
