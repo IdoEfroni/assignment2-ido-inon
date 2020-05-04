@@ -541,7 +541,7 @@ function Start() {
 
 	}
 
-	song = new Audio('pacManSong.mp3')
+	song = new Audio('The_Zephyr_Song.mp3');
 	song.play();
 	generateGhosts();
 	//ghostsUpdate();
@@ -880,7 +880,7 @@ function UpdatePosition() {
 
 			}
 			else {
-				window.alert("Game over");
+				window.alert("Winner!!!");
 			}
 		}
 		else {
@@ -921,7 +921,7 @@ function gameEnded() {
 function checkFail(ghost) {
 	if (ghost.i == shape.i && ghost.j == shape.j) {
 		lives--;
-		var death = new Audio("pacManDie.mp3");
+		let death = new Audio("pacManDie.mp3");
 		death.play();
 		score = score - 10;
 		if (lives > 0) {
