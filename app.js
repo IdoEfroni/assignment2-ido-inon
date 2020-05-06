@@ -541,7 +541,7 @@ function Start() {
 
 	}
 
-	song = new Audio('The_Zephyr_Song.mp3');
+	song = new Audio('pacManSong.mp3');
 	song.play();
 	generateGhosts();
 	//ghostsUpdate();
